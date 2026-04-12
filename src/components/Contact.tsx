@@ -1,13 +1,26 @@
 "use client";
 
-import { useState } from "react";
-import useReveal from "@/hooks/useReveal";
+import { useState, useEffect } from "react";
 import { sendEmail } from "@/app/actions";
 
 export default function Contact() {
-  const containerRef = useReveal();
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const handleReveal = () => {
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    handleReveal();
+    window.addEventListener("scroll", handleReveal);
+    return () => window.removeEventListener("scroll", handleReveal);
+  }, []);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,186 +47,159 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={containerRef}>
+    <section id="contact">
       <div className="container">
-        <div className="contact-grid">
-          <div className="contact-info">
-            <span className="section-label reveal">Get in Touch</span>
-            <h2 className="section-title reveal">
-              Let's Build Something <em>Extraordinary</em>.
+        <div className="contact-editorial">
+          <div className="contact-text">
+            <span className="section-label reveal">The Dialogue</span>
+            <h2 className="section-title reveal delay-1">
+              Start a <em className="serif">Extraordinary</em> Conversation.
             </h2>
-            <p className="section-desc reveal">
-              Ready to take your digital presence to the next level? Share your project vision and let's engineer a solution that drives growth.
+            <p className="section-desc reveal delay-2">
+              Ready to architect your digital future? Reach out via the form or through our direct channels.
             </p>
-
-            <div className="contact-channels">
-              <div className="channel-card reveal delay-1">
-                <div className="channel-icon">📧</div>
-                <div className="channel-details">
-                  <span className="channel-label">Email Us</span>
-                  <a href="mailto:omkarchavan1500@gmail.com" className="channel-link">omkarchavan1500@gmail.com</a>
-                </div>
+            
+            <div className="direct-channels reveal delay-3">
+              <div className="direct-item">
+                <span className="direct-label">Digital Office</span>
+                <a href="mailto:omkarchavan1500@gmail.com" className="direct-link">omkarchavan1500@gmail.com</a>
               </div>
-              <div className="channel-card reveal delay-2">
-                <div className="channel-icon">📱</div>
-                <div className="channel-details">
-                  <span className="channel-label">Call / WhatsApp</span>
-                  <a href="https://wa.me/919096518451" className="channel-link">+91 90965 18451</a>
-                </div>
+              <div className="direct-item">
+                <span className="direct-label">Direct Line</span>
+                <a href="https://wa.me/919096518451" className="direct-link">+91 90965 18451</a>
               </div>
-            </div>
-
-            <div className="social-links reveal delay-3">
-              <a href="https://www.instagram.com/omkarchavann_" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
-              <a href="https://wa.me/919096518451" target="_blank" rel="noopener noreferrer" className="social-link">WhatsApp</a>
             </div>
           </div>
 
-          <div className="contact-form-wrap reveal-right">
+          <div className="contact-form-side reveal delay-4">
             <form id="contact-form" onSubmit={onSubmit}>
-              <div className="form-grid">
+              <div className="form-row">
                 <div className="input-group">
-                  <input type="text" name="name" placeholder="Full Name" required />
-                  <div className="input-focus"></div>
+                  <label>Your Name</label>
+                  <input type="text" name="name" required />
                 </div>
                 <div className="input-group">
-                  <input type="email" name="email" placeholder="Email Address" required />
-                  <div className="input-focus"></div>
+                  <label>Email Address</label>
+                  <input type="email" name="email" required />
                 </div>
               </div>
               <div className="input-group">
-                <input type="text" name="subject" placeholder="Subject" required />
-                <div className="input-focus"></div>
+                <label>Subject of Inquiry</label>
+                <input type="text" name="subject" required />
               </div>
               <div className="input-group">
-                <textarea name="message" placeholder="Project Details" rows={5} required></textarea>
-                <div className="input-focus"></div>
+                <label>Project Details</label>
+                <textarea name="message" rows={4} required></textarea>
               </div>
-              <button type="submit" className="btn-primary" disabled={isSubmitting}>
-                <span>{isSubmitting ? "Sending..." : "Submit Inquiry"}</span>
-              </button>
-              {result && <p className="form-result">{result}</p>}
+              
+              <div className="form-submit">
+                <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? "Dispatching..." : "Send Inquiry"}
+                </button>
+                {result && <span className="submit-status">{result}</span>}
+              </div>
             </form>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .contact-grid {
+        #contact {
+          background: var(--surface-low);
+          border-top: 1px solid var(--glass-border);
+        }
+        .contact-editorial {
           display: grid;
           grid-template-columns: 1fr 1.2fr;
-          gap: 100px;
+          gap: 120px;
           align-items: flex-start;
         }
-        
-        .contact-channels {
+        .direct-channels {
+          margin-top: 60px;
           display: flex;
           flex-direction: column;
-          gap: 24px;
-          margin: 48px 0;
+          gap: 32px;
         }
-        .channel-card {
+        .direct-item {
           display: flex;
-          align-items: center;
-          gap: 20px;
-          background: var(--dark-2);
-          padding: 24px;
-          border-radius: 20px;
-          border: 1px solid var(--glass-border);
-          transition: border-color 0.3s;
+          flex-direction: column;
+          gap: 8px;
         }
-        .channel-card:hover { border-color: var(--gold); }
-        .channel-icon { font-size: 1.8rem; }
-        .channel-label {
-          display: block;
-          font-size: 0.7rem;
+        .direct-label {
+          font-size: 0.65rem;
           text-transform: uppercase;
-          color: var(--text-dim);
-          letter-spacing: 0.1em;
-          margin-bottom: 4px;
+          letter-spacing: 0.15em;
+          color: var(--primary-container);
         }
-        .channel-link {
+        .direct-link {
           font-size: 1.1rem;
-          color: var(--gold-light);
+          color: var(--on-surface);
           text-decoration: none;
-          font-weight: 500;
+          transition: opacity 0.3s;
         }
-        
-        .social-links {
-          display: flex;
-          gap: 24px;
+        .direct-link:hover { opacity: 0.6; }
+
+        .contact-form-side {
+          padding-top: 20px;
         }
-        .social-link {
-          color: var(--text-dim);
-          text-decoration: none;
-          font-size: 0.8rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          transition: color 0.3s;
-        }
-        .social-link:hover { color: var(--gold); }
-        
-        .contact-form-wrap {
-          background: var(--dark-2);
-          padding: 60px;
-          border-radius: 32px;
-          border: 1px solid var(--glass-border);
-          box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-        }
-        
-        .form-grid {
+        .form-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
+          gap: 32px;
+        }
+        .input-group {
+          margin-bottom: 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .input-group label {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--on-surface-variant);
+        }
+        .input-group input, 
+        .input-group textarea {
+          background: transparent;
+          border: none;
+          border-bottom: 1px solid var(--glass-border);
+          padding: 12px 0;
+          color: var(--on-surface);
+          font-family: inherit;
+          font-size: 1rem;
+          outline: none;
+          transition: border-color 0.4s;
+        }
+        .input-group input:focus, 
+        .input-group textarea:focus {
+          border-color: var(--primary-container);
+        }
+        
+        .form-submit {
+          margin-top: 20px;
+          display: flex;
+          align-items: center;
           gap: 24px;
         }
-        
-        .input-group {
-          position: relative;
-          margin-bottom: 24px;
+        .submit-status {
+          font-size: 0.85rem;
+          color: var(--primary-container);
+          font-style: italic;
         }
-        input, textarea {
-          width: 100%;
-          background: var(--dark-3);
-          border: 1px solid var(--glass-border);
-          padding: 18px 24px;
-          border-radius: 12px;
-          color: var(--text);
-          font-family: inherit;
-          font-size: 0.95rem;
-          transition: border-color 0.3s;
-          outline: none;
-        }
-        textarea { resize: vertical; }
-        .input-focus {
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          width: 0;
-          height: 2px;
-          background: var(--gold);
-          transition: width 0.3s, left 0.3s;
-        }
-        input:focus + .input-focus, textarea:focus + .input-focus {
-          width: 100%;
-          left: 0;
-        }
-        input:focus, textarea:focus { border-color: transparent; }
-        
-        .form-result {
-          margin-top: 20px;
-          font-size: 0.9rem;
-          color: var(--gold);
-        }
-        
-        @media (max-width: 1024px) {
-          .contact-grid { grid-template-columns: 1fr; gap: 80px; }
-          .contact-form-wrap { padding: 40px; }
+
+        @media (max-width: 1100px) {
+          .contact-editorial { grid-template-columns: 1fr; gap: 80px; }
+          .contact-text { max-width: 700px; }
         }
         @media (max-width: 640px) {
-          .form-grid { grid-template-columns: 1fr; }
-          .contact-form-wrap { padding: 30px 20px; }
+          .form-row { grid-template-columns: 1fr; gap: 0; }
         }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
       `}</style>
     </section>
   );

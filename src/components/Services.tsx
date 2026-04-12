@@ -1,136 +1,159 @@
 "use client";
 
-import useReveal from "@/hooks/useReveal";
+import { useEffect } from "react";
 
 const services = [
   {
-    title: "Web Development",
-    icon: "⚡",
-    desc: "Building high-quality websites, landing pages, and IT software with Next.js, HTML5, CSS3, and JavaScript — deployed on Vercel & Hostinger.",
-    features: ["Next.js & HTML/CSS Sites", "Landing Pages & Business Sites", "Vercel & Hostinger Deployments"]
+    title: "Digital Architecture",
+    num: "01",
+    desc: "Precision-engineered websites and enterprise-grade software built with Next.js and React. Focusing on cinematic performance and technical structural integrity.",
+    tags: ["Next.js", "Vercel", "Performance Audit"]
   },
   {
-    title: "AI Services",
-    icon: "🧠",
-    desc: "Designing custom chatbots and multi-agent automation systems using AI and CrewAI to streamline and supercharge your business processes.",
-    features: ["Custom AI Chatbots", "CrewAI Multi-Agent Systems", "Business Process Automation"]
+    title: "AI Synthesis",
+    num: "02",
+    desc: "Architecting custom AI ecosystems and multi-agent systems using CrewAI. Automating the complex to allow for strategic growth and innovation.",
+    tags: ["CrewAI", "LLM Logic", "Automation"]
   },
   {
-    title: "SEO & Social Media",
-    icon: "📈",
-    desc: "Ranking your Vercel-hosted site on Google Search Console, paired with high-impact Instagram carousels and reels that mirror your website's design.",
-    features: ["Google Search Console Ranking", "Instagram Carousels & Reels", "Brand Design Synergy"]
+    title: "Visibility Strategy",
+    num: "03",
+    desc: "Sophisticated SEO positioning and design-centric social media marketing that mirrors your site's premium aesthetic for cohesive brand dominance.",
+    tags: ["SEO Architecture", "Vercel", "Brand Synergy"]
   }
 ];
 
 export default function Services() {
-  const containerRef = useReveal();
+  useEffect(() => {
+    const handleReveal = () => {
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    handleReveal();
+    window.addEventListener("scroll", handleReveal);
+    return () => window.removeEventListener("scroll", handleReveal);
+  }, []);
 
   return (
-    <section id="services" ref={containerRef}>
+    <section id="services">
       <div className="container">
-        <div className="section-header">
-          <span className="section-label reveal">Expertise</span>
-          <h2 className="section-title reveal">
-            Advanced <em>Digital</em><br />Solutions.
+        <div className="services-header">
+          <span className="section-label reveal">The Expertise</span>
+          <h2 className="section-title reveal delay-1">
+            Curated <em>Digital</em><br />High-End Logic.
           </h2>
-          <p className="section-desc reveal">
-            We provide full-spectrum digital engineering with a focus on performance, scalability, and innovation.
+          <p className="section-desc reveal delay-2">
+            Treating every project as a bespoke digital architecture, focusing on the intersection of aesthetic authority and technical precision.
           </p>
         </div>
 
         <div className="services-grid">
           {services.map((service, index) => (
             <div key={index} className={`service-card reveal delay-${index + 1}`}>
-              <div className="service-icon">{service.icon}</div>
-              <h3 className="service-card-title">{service.title}</h3>
+              <div className="card-top">
+                <span className="service-num serif">{service.num}</span>
+                <div className="service-dot"></div>
+              </div>
+              <h3 className="service-card-title serif">{service.title}</h3>
               <p className="service-card-desc">{service.desc}</p>
-              <ul className="service-list">
-                {service.features.map((feature, fIndex) => (
-                  <li key={fIndex}>{feature}</li>
+              <div className="service-tags">
+                {service.tags.map((tag, tIndex) => (
+                  <span key={tIndex} className="tag">{tag}</span>
                 ))}
-              </ul>
-              <div className="service-glow"></div>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <style jsx>{`
-        .section-header {
-          margin-bottom: 80px;
+        #services {
+          background: var(--surface);
+          border-top: 1px solid var(--glass-border);
+        }
+        .services-header {
+          margin-bottom: 100px;
         }
         .services-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 32px;
+          gap: 24px;
         }
         .service-card {
-          background: var(--dark-2);
+          background: var(--surface-low);
+          padding: 60px 50px;
           border: 1px solid var(--glass-border);
-          padding: 48px 40px;
-          border-radius: 24px;
           position: relative;
-          overflow: hidden;
-          transition: transform 0.4s var(--transition), border-color 0.4s;
+          transition: all 0.6s var(--transition);
         }
         .service-card:hover {
-          transform: translateY(-12px);
-          border-color: var(--gold);
+          background: var(--surface-container);
+          border-color: var(--primary-container);
+          transform: translateY(-8px);
         }
-        .service-icon {
-          font-size: 2.5rem;
-          margin-bottom: 28px;
+        .card-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 40px;
+        }
+        .service-num {
+          font-size: 1.5rem;
+          color: var(--primary-container);
+          opacity: 0.8;
+          font-weight: 400;
+        }
+        .service-dot {
+          width: 8px;
+          height: 8px;
+          background: var(--primary-container);
+          border-radius: 50%;
+          opacity: 0.3;
         }
         .service-card-title {
-          font-size: 1.5rem;
-          font-weight: 600;
-          margin-bottom: 16px;
-          color: var(--text);
+          font-size: 1.6rem;
+          font-weight: 500;
+          margin-bottom: 24px;
+          color: var(--on-surface);
         }
         .service-card-desc {
-          color: var(--text-dim);
+          color: var(--on-surface-variant);
           font-size: 0.95rem;
-          line-height: 1.6;
-          margin-bottom: 28px;
+          line-height: 1.8;
+          margin-bottom: 40px;
           font-weight: 300;
         }
-        .service-list {
-          list-style: none;
+        .service-tags {
           display: flex;
-          flex-direction: column;
           gap: 12px;
+          flex-wrap: wrap;
         }
-        .service-list li {
-          font-size: 0.85rem;
-          color: var(--text-dim);
-          padding-left: 20px;
-          position: relative;
-        }
-        .service-list li::before {
-          content: '→';
-          position: absolute;
-          left: 0;
-          color: var(--gold);
-          font-weight: 700;
-        }
-        .service-glow {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 100px;
-          height: 100px;
-          background: radial-gradient(circle at top right, rgba(201,168,76,0.1), transparent 70%);
-          pointer-events: none;
+        .tag {
+          font-size: 0.65rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--primary-container);
+          padding: 6px 12px;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          font-weight: 600;
         }
 
         @media (max-width: 1024px) {
           .services-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .services-grid { grid-template-columns: 1fr; }
           .service-card { padding: 40px 30px; }
         }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
       `}</style>
     </section>
   );

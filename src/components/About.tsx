@@ -1,205 +1,192 @@
 "use client";
 
-import useReveal from "@/hooks/useReveal";
+import { useEffect } from "react";
 
 export default function About() {
-  const containerRef = useReveal();
+  useEffect(() => {
+    const handleReveal = () => {
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    handleReveal();
+    window.addEventListener("scroll", handleReveal);
+    return () => window.removeEventListener("scroll", handleReveal);
+  }, []);
 
   return (
-    <section id="about" ref={containerRef}>
+    <section id="about">
       <div className="container">
-        <div className="about-grid">
-          <div className="about-info">
-            <span className="section-label reveal">The Founder</span>
-            <h2 className="section-title reveal">
-              Driven by <em>Determination</em>,<br />
-              Built for Results.
-            </h2>
-            <p className="section-desc reveal">
-              I'm Omkar Chavan, Founder & Lead Developer at <strong>Omkar IT Determination</strong>. I provide high-quality websites, landing pages, IT software, and AI-driven services — transforming complex problems into seamless digital experiences.
-            </p>
-            <p className="about-detailed reveal">
-              From ranking Vercel sites on Google Search Console to building CrewAI multi-agent systems and creating Instagram marketing strategies that mirror your brand — I deliver end-to-end digital excellence for every client.
-            </p>
-
-            <div className="tech-arsenal reveal">
-              <span className="arsenal-label">Technical Arsenal</span>
-              <div className="arsenal-grid">
-                <div className="arsenal-item">
-                  <span className="arsenal-cat">Frontend</span>
-                  <span className="arsenal-techs">Next.js · HTML5 · CSS3 · Tailwind · JavaScript</span>
-                </div>
-                <div className="arsenal-item">
-                  <span className="arsenal-cat">Backend</span>
-                  <span className="arsenal-techs">Python · Flask · BeautifulSoup · Tkinter</span>
-                </div>
-                <div className="arsenal-item">
-                  <span className="arsenal-cat">Database</span>
-                  <span className="arsenal-techs">SQLite</span>
-                </div>
-                <div className="arsenal-item">
-                  <span className="arsenal-cat">Mobile / Env</span>
-                  <span className="arsenal-techs">Termux Development & Troubleshooting</span>
-                </div>
-                <div className="arsenal-item">
-                  <span className="arsenal-cat">Marketing & SEO</span>
-                  <span className="arsenal-techs">Google Search Console · Vercel · Hostinger · Instagram</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="about-media reveal-right">
-            <div className="about-img-frame">
+        <div className="about-split">
+          <div className="about-visual reveal">
+            <div className="visual-container">
+              <div className="glass-overlay"></div>
               <img
                 src="/logo.jpg"
                 alt="Omkar Chavan"
-                className="about-img"
+                className="about-image"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = "none";
                 }}
               />
-              <div className="floating-badge">
-                <div className="badge-inner">
-                  <span className="badge-year">Est. 2021</span>
-                  <span className="badge-title">Omkar IT Determination</span>
-                </div>
+              <div className="experience-badge serif">
+                <span className="year">Est. 2021</span>
+                <span className="name">IT Determination</span>
               </div>
             </div>
-            <div className="experience-pill">
-              Next.js · AI · SEO
+          </div>
+          
+          <div className="about-content">
+            <span className="section-label reveal">The Founder</span>
+            <h2 className="section-title reveal delay-1">
+              Driven by <em className="serif">Determination</em>,<br />
+              Built for Digital Excellence.
+            </h2>
+            <p className="section-desc reveal delay-2">
+              Based in Pune, India, I specialize in transforming complex business challenges into sleek, high-performance digital products. My approach combines precision engineering with a deep understanding of AI-driven automation.
+            </p>
+            
+            <div className="tech-editorial reveal delay-3">
+              <div className="tech-row">
+                <span className="tech-label">The Visionary</span>
+                <p>Next.js, AI multi-agent systems, and SEO strategies that dominate search rankings.</p>
+              </div>
+              <div className="tech-row">
+                <span className="tech-label">The Architect</span>
+                <p>Python engineering, distributed logic, and robust backend foundations.</p>
+              </div>
+            </div>
+
+            <div className="about-actions reveal delay-4">
+              <div className="signature-mark serif">Omkar Chavan</div>
             </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .about-grid {
+        #about {
+          background: var(--surface-low);
+          overflow: hidden;
+        }
+        .about-split {
           display: grid;
-          grid-template-columns: 1.2fr 1fr;
-          gap: 100px;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 120px;
           align-items: center;
         }
-        .about-detailed {
-          color: var(--text-dim);
-          font-size: 1rem;
-          line-height: 1.8;
-          margin: 24px 0 40px;
-          font-weight: 300;
+        .about-visual {
+          position: relative;
         }
-        .tech-arsenal {
-          padding-top: 36px;
-          border-top: 1px solid var(--glass-border);
+        .visual-container {
+          position: relative;
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          background: var(--surface-highest);
+          aspect-ratio: 4/5;
         }
-        .arsenal-label {
-          display: block;
-          font-size: 0.7rem;
-          text-transform: uppercase;
-          letter-spacing: 0.16em;
-          color: var(--gold);
-          font-weight: 700;
-          margin-bottom: 20px;
+        .glass-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.1), transparent);
+          z-index: 1;
         }
-        .arsenal-grid {
+        .about-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(1) contrast(1.1);
+          transition: all 0.8s var(--transition);
+        }
+        .visual-container:hover { border: 1px solid var(--primary-container); }
+        .visual-container:hover .about-image {
+          filter: grayscale(0) contrast(1);
+          transform: scale(1.05);
+        }
+        .experience-badge {
+          position: absolute;
+          bottom: 30px;
+          left: 30px;
+          right: 30px;
+          padding: 24px;
+          background: rgba(19, 19, 19, 0.85);
+          backdrop-filter: blur(20px);
+          border: 1px solid var(--glass-border);
           display: flex;
-          flex-direction: column;
-          gap: 14px;
+          justify-content: space-between;
+          align-items: center;
+          z-index: 2;
         }
-        .arsenal-item {
-          display: grid;
-          grid-template-columns: 130px 1fr;
-          gap: 12px;
-          align-items: baseline;
+        .experience-badge .year {
+          color: var(--primary-container);
+          font-weight: 600;
+          font-size: 1.1rem;
         }
-        .arsenal-cat {
+        .experience-badge .name {
+          color: var(--on-surface-variant);
           font-size: 0.75rem;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--text-dim);
-          font-weight: 600;
-        }
-        .arsenal-techs {
-          font-size: 0.88rem;
-          color: var(--text);
-          font-weight: 300;
-          line-height: 1.4;
-        }
-        .about-media {
-          position: relative;
-        }
-        .about-img-frame {
-          position: relative;
-          border-radius: 24px;
-          padding: 16px;
-          border: 1px solid var(--glass-border);
-          background: var(--glass);
-          overflow: visible;
-        }
-        .about-img {
-          width: 100%;
-          aspect-ratio: 4/5;
-          object-fit: cover;
-          border-radius: 16px;
-          filter: grayscale(0.2) contrast(1.1);
-          transition: transform 0.6s var(--transition);
-        }
-        .about-img-frame:hover .about-img {
-          transform: scale(1.03);
-          filter: grayscale(0) contrast(1);
-        }
-        .floating-badge {
-          position: absolute;
-          bottom: -30px;
-          right: -30px;
-          background: linear-gradient(135deg, var(--gold), var(--saffron));
-          padding: 24px;
-          border-radius: 20px;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .badge-inner {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-          color: var(--dark);
-        }
-        .badge-year {
-          font-weight: 800;
-          font-size: 1.2rem;
-          letter-spacing: 0.05em;
-        }
-        .badge-title {
-          font-size: 0.7rem;
-          text-transform: uppercase;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          opacity: 0.8;
-        }
-        .experience-pill {
-          position: absolute;
-          top: 40px;
-          left: -40px;
-          background: var(--dark-2);
-          border: 1px solid var(--gold);
-          color: var(--gold);
-          padding: 12px 24px;
-          border-radius: 50px;
-          font-size: 0.8rem;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-          animation: fadeIn 1s ease 0.5s both;
+          letter-spacing: 0.15em;
         }
 
-        @media (max-width: 1024px) {
-          .about-grid { grid-template-columns: 1fr; gap: 80px; }
-          .about-media { max-width: 500px; margin: 0 auto; }
+        .tech-editorial {
+          margin-top: 56px;
+          border-top: 1px solid var(--glass-border);
+          padding-top: 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+        }
+        .tech-row {
+          display: grid;
+          grid-template-columns: 140px 1fr;
+          gap: 24px;
+        }
+        .tech-label {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: var(--primary-container);
+          font-weight: 600;
+        }
+        .tech-row p {
+          font-size: 0.95rem;
+          color: var(--on-surface-variant);
+          font-weight: 300;
+        }
+
+        .about-actions {
+          margin-top: 64px;
+        }
+        .signature-mark {
+          font-size: 2rem;
+          color: var(--on-surface);
+          opacity: 0.8;
+          font-style: italic;
+        }
+
+        @media (max-width: 1100px) {
+          .about-split { grid-template-columns: 1fr; gap: 80px; }
+          .about-visual { max-width: 500px; margin: 0 auto; }
+        }
+        @media (max-width: 768px) {
+          .experience-badge { padding: 16px; bottom: 20px; left: 20px; right: 20px; }
+          .experience-badge .year { font-size: 0.9rem; }
+          .experience-badge .name { font-size: 0.65rem; }
         }
         @media (max-width: 640px) {
-          .stat-row { flex-wrap: wrap; gap: 30px; }
-          .floating-badge { bottom: -20px; right: -10px; padding: 16px; }
-          .experience-pill { left: -10px; top: 20px; font-size: 0.7rem; }
+          .tech-row { grid-template-columns: 1fr; gap: 8px; }
+          .signature-mark { font-size: 1.5rem; }
         }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
       `}</style>
     </section>
   );

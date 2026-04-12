@@ -6,144 +6,121 @@ export default function Footer() {
   return (
     <footer id="footer">
       <div className="container">
-        <div className="footer-grid">
-          <div className="footer-brand">
-            <Link href="#hero" className="footer-logo">
-              <img
-                src="/logo.jpg"
-                alt="Omkar IT Determination"
+        <div className="footer-top">
+          <div className="footer-signature">
+            <div className="footer-brand-logo">
+              <img 
+                src="/logo.jpg" 
+                alt="Omkar IT Logo" 
                 className="footer-logo-img"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
+                onError={(e) => (e.currentTarget.style.display = 'none')}
               />
-              <span className="footer-logo-text">Omkar IT Determination</span>
-            </Link>
-            <p className="footer-tagline">
-              Transforming complex problems into seamless digital experiences through precision engineering, AI innovation, and strategic determination.
+              <h2 className="signature-logo serif">Omkar IT Determination</h2>
+            </div>
+            <p className="signature-tagline">
+              Architecting the digital future through precision engineering and strategic AI integration.
             </p>
           </div>
-
-          <div className="footer-group">
-            <h4 className="footer-label">Navigation</h4>
-            <ul className="footer-links">
-              <li><Link href="#about">The Founder</Link></li>
-              <li><Link href="#services">Our Expertise</Link></li>
-              <li><Link href="#portfolio">Artifacts</Link></li>
-              <li><Link href="#process">The Method</Link></li>
-            </ul>
-          </div>
-
-          <div className="footer-group">
-            <h4 className="footer-label">Connect</h4>
-            <ul className="footer-links">
-              <li><a href="https://wa.me/919096518451" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-              <li><a href="https://www.instagram.com/omkarchavann_" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://the-cafe-elite.vercel.app/" target="_blank" rel="noopener noreferrer">The Cafe Elite</a></li>
-              <li><a href="https://www.shreetejproperties.com/" target="_blank" rel="noopener noreferrer">Shreetej Properties</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-group">
-            <h4 className="footer-label">Contact</h4>
-            <ul className="footer-links">
-              <li><a href="mailto:omkarchavan1500@gmail.com">omkarchavan1500@gmail.com</a></li>
-              <li><a href="tel:+919096518451">+91 90965 18451</a></li>
-              <li><span style={{color: 'var(--text-dim)', fontSize: '0.9rem', fontWeight: 300}}>Sangamner, India</span></li>
-            </ul>
+          
+          <div className="footer-nav">
+            <div className="nav-group">
+              <span className="nav-label">Navigation</span>
+              <ul className="nav-list">
+                <li><Link href="#about">The Founder</Link></li>
+                <li><Link href="#services">The Expertise</Link></li>
+                <li><Link href="#portfolio">The Artifacts</Link></li>
+                <li><Link href="#process">The Method</Link></li>
+              </ul>
+            </div>
+            <div className="nav-group">
+              <span className="nav-label">Connect</span>
+              <ul className="nav-list">
+                <li><a href="https://www.instagram.com/omkarchavann_" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                <li><a href="https://wa.me/919096518451" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+                <li><a href="mailto:omkarchavan1500@gmail.com">Email Office</a></li>
+              </ul>
+            </div>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p className="copyright">
+          <div className="copyright">
             © {new Date().getFullYear()} Omkar IT Determination. All Rights Reserved.
-          </p>
-          <div className="footer-legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+          </div>
+          <div className="location-stamp">
+            Pune, India — Global Scale.
           </div>
         </div>
       </div>
 
       <style jsx>{`
         footer {
-          background: var(--dark-2);
-          padding: 100px 0 40px;
+          background: var(--surface);
+          padding: 120px 0 60px;
           border-top: 1px solid var(--glass-border);
-          position: relative;
         }
-        .footer-grid {
+        .footer-top {
           display: grid;
-          grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-          gap: 60px;
-          margin-bottom: 80px;
+          grid-template-columns: 1.5fr 1fr;
+          gap: 100px;
+          margin-bottom: 100px;
         }
-        .footer-logo {
+        .footer-brand-logo {
           display: flex;
           align-items: center;
-          gap: 12px;
-          text-decoration: none;
+          gap: 20px;
           margin-bottom: 24px;
-          transition: transform 0.3s ease;
-        }
-        .footer-logo:hover {
-          transform: translateX(5px);
         }
         .footer-logo-img {
-          width: 40px;
-          height: 40px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
-          border: 1.5px solid var(--gold);
+          border: 1px solid var(--primary-container);
           object-fit: cover;
-          transition: all 0.3s ease;
-          box-shadow: 0 0 0 rgba(212, 175, 55, 0);
         }
-        .footer-logo:hover .footer-logo-img {
-          box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-          border-color: var(--text);
+        .signature-logo {
+          font-size: 2rem;
+          color: var(--primary-container);
         }
-        .footer-logo-text {
-          font-family: 'Cormorant Garamond', serif;
-          font-style: italic;
-          font-size: 1.3rem;
-          color: var(--gold);
-          letter-spacing: 0.02em;
-          transition: color 0.3s ease;
-        }
-        .footer-logo:hover .footer-logo-text {
-          color: var(--text);
-        }
-        .footer-tagline {
-          color: var(--text-dim);
-          font-size: 0.9rem;
-          line-height: 1.6;
-          max-width: 320px;
+        .signature-tagline {
+          font-size: 1.1rem;
+          color: var(--on-surface-variant);
+          max-width: 400px;
+          line-height: 1.7;
           font-weight: 300;
         }
-        .footer-label {
-          color: var(--text);
-          font-size: 0.75rem;
+
+        .footer-nav {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+        }
+        .nav-label {
+          display: block;
+          font-size: 0.7rem;
           text-transform: uppercase;
           letter-spacing: 0.15em;
-          margin-bottom: 28px;
-          font-weight: 700;
+          color: var(--on-surface-variant);
+          margin-bottom: 32px;
+          font-weight: 600;
         }
-        .footer-links {
+        .nav-list {
           list-style: none;
           display: flex;
           flex-direction: column;
           gap: 16px;
         }
-        .footer-links a {
-          color: var(--text-dim);
+        .nav-list a {
+          color: var(--on-surface);
           text-decoration: none;
-          font-size: 0.9rem;
-          transition: color 0.3s;
+          font-size: 1rem;
           font-weight: 300;
+          transition: color 0.3s;
         }
-        .footer-links a:hover {
-          color: var(--gold);
+        .nav-list a:hover {
+          color: var(--primary-container);
         }
+
         .footer-bottom {
           padding-top: 40px;
           border-top: 1px solid var(--glass-border);
@@ -151,24 +128,20 @@ export default function Footer() {
           justify-content: space-between;
           align-items: center;
           font-size: 0.8rem;
-          color: var(--text-dim);
+          color: var(--on-surface-variant);
+          opacity: 0.6;
         }
-        .footer-legal {
-          display: flex;
-          gap: 24px;
-        }
-        .footer-legal a {
-          color: var(--text-dim);
-          text-decoration: none;
-          transition: color 0.3s;
-        }
-        .footer-legal a:hover { color: var(--gold); }
 
         @media (max-width: 1024px) {
-          .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+          .footer-top { grid-template-columns: 1fr; gap: 80px; }
+          .footer-nav { max-width: 600px; }
+        }
+        @media (max-width: 768px) {
+          .footer-nav { grid-template-columns: 1fr; gap: 40px; }
+          .footer-brand-logo { flex-direction: column; align-items: flex-start; }
+          .signature-logo { font-size: 1.5rem; }
         }
         @media (max-width: 640px) {
-          .footer-grid { grid-template-columns: 1fr; }
           .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
       `}</style>

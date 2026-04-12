@@ -1,182 +1,190 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleReveal = () => {
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    handleReveal();
+    window.addEventListener("scroll", handleReveal);
+    return () => window.removeEventListener("scroll", handleReveal);
+  }, []);
+
   return (
-    <section id="hero">
-      <div className="hero-bg"></div>
-      <div className="hero-grid"></div>
-      <div className="hero-content">
-        <div className="hero-logo-badge">
-          <img
-            src="/logo.jpg"
-            alt="Omkar IT Determination"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
-        </div>
-        <div className="hero-eyebrow">
-          <span className="hero-eyebrow-dot"></span>
-          Available for new projects
-        </div>
-        <h1 className="hero-title">
-          Founder & Lead<br />
-          <em>Developer</em>
-        </h1>
-        <p className="hero-sub">
-          <strong>Omkar IT Determination</strong> — transforming complex problems into seamless digital experiences through precision engineering, AI innovation, and strategic growth.
-        </p>
-        <div className="hero-ctas">
-          <Link href="#portfolio" className="btn-primary">
-            <span>View My Work</span>
-          </Link>
-          <Link href="#contact" className="btn-ghost">
-            Start a Project →
-          </Link>
+    <section id="hero" ref={heroRef}>
+      <div className="hero-atmosphere"></div>
+      <div className="hero-grain"></div>
+      
+      <div className="container">
+        <div className="hero-content">
+          <div className="hero-label reveal">
+            <img 
+              src="/logo.jpg" 
+              alt="Logo" 
+              className="label-logo" 
+              onError={(e) => (e.currentTarget.style.display = 'none')}
+            />
+            <span>Precision Engineering. Strategic Determination.</span>
+          </div>
+          <h1 className="hero-title display-lg reveal delay-1">
+            Transforming complex problems into <br />
+            <em className="serif">seamless digital experiences</em>
+          </h1>
+          <p className="hero-desc reveal delay-2">
+            Providing precision engineering, AI innovation, and strategic determination for the architectural future of digital enterprise.
+          </p>
+          <div className="hero-ctas reveal delay-3">
+            <Link href="#portfolio" className="btn-primary">
+              The Artifacts
+            </Link>
+            <Link href="#contact" className="btn-ghost">
+              Start a Dialogue
+            </Link>
+          </div>
         </div>
       </div>
-      <div className="scroll-ind">
-        <span className="scroll-ind-text">Scroll</span>
-        <div className="scroll-ind-line"></div>
+
+      <div className="hero-footer container">
+        <div className="hero-scroll reveal delay-4">
+          <span className="scroll-text">Scroll to Explore</span>
+          <div className="scroll-line"></div>
+        </div>
       </div>
 
       <style jsx>{`
         #hero {
           min-height: 100vh;
           display: flex;
-          align-items: center;
+          flex-direction: column;
           justify-content: center;
-          position: relative;
+          background: var(--surface);
+          padding-top: 140px;
           overflow: hidden;
-          padding: 120px 60px 80px;
         }
-        .hero-bg {
+        .hero-atmosphere {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
-                      radial-gradient(ellipse 40% 40% at 80% 60%, rgba(255,111,0,0.05) 0%, transparent 60%);
+          background: 
+            radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 20% 80%, rgba(191, 205, 255, 0.03) 0%, transparent 50%);
+          pointer-events: none;
         }
-        .hero-grid {
+        .hero-grain {
           position: absolute;
           inset: 0;
-          background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-          background-size: 60px 60px;
-          mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+          opacity: 0.03;
+          background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+          pointer-events: none;
         }
         .hero-content {
           position: relative;
-          max-width: 900px;
-          text-align: center;
-          z-index: 1;
+          z-index: 2;
+          max-width: 1100px;
         }
-        .hero-eyebrow {
-          display: inline-flex;
+        .hero-label {
+          display: flex;
           align-items: center;
-          gap: 10px;
-          padding: 8px 20px;
-          border-radius: 50px;
-          border: 1px solid var(--glass-border);
-          background: var(--glass);
-          font-size: 0.78rem;
-          font-weight: 500;
-          letter-spacing: 0.12em;
+          gap: 16px;
+          font-size: 0.8rem;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: var(--gold);
-          margin-bottom: 36px;
-          animation: fadeInUp 0.7s ease 0.3s both;
+          color: var(--primary-container);
+          margin-bottom: 40px;
+          font-weight: 500;
         }
-        .hero-eyebrow-dot {
-          width: 6px;
-          height: 6px;
+        .label-logo {
+          width: 28px;
+          height: 28px;
           border-radius: 50%;
-          background: var(--gold);
-          animation: pulse 2s ease infinite;
+          border: 1px solid var(--primary-container);
+          object-fit: cover;
         }
-        .hero-title {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(3.2rem, 8vw, 7rem);
-          font-weight: 600;
-          line-height: 1.05;
-          margin-bottom: 28px;
-          animation: fadeInUp 0.8s ease 0.45s both;
-        }
+        .hero-title { margin-bottom: 40px; }
         .hero-title em {
           font-style: italic;
-          background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--saffron));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: var(--primary-container);
+          opacity: 0.95;
         }
-        .hero-sub {
-          font-size: 1.1rem;
-          color: var(--text-dim);
-          max-width: 560px;
-          margin: 0 auto 48px;
+        .hero-desc {
+          font-size: 1.25rem;
+          color: var(--on-surface-variant);
+          max-width: 680px;
+          margin-bottom: 64px;
           line-height: 1.7;
           font-weight: 300;
-          animation: fadeInUp 0.8s ease 0.6s both;
-        }
-        .hero-sub strong {
-          color: var(--gold-light);
-          font-weight: 500;
         }
         .hero-ctas {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 20px;
-          flex-wrap: wrap;
-          animation: fadeInUp 0.8s ease 0.75s both;
+          gap: 24px;
         }
-        .hero-logo-badge {
-          display: inline-block;
-          margin-bottom: 28px;
-          animation: fadeInDown 0.8s ease 0.1s both;
-        }
-        .hero-logo-badge img {
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
-          border: 2px solid var(--gold);
-          box-shadow: 0 0 40px rgba(201,168,76,0.25);
-        }
-        .scroll-ind {
+        
+        .hero-footer {
           position: absolute;
-          bottom: 36px;
-          left: 50%;
-          transform: translateX(-50%);
+          bottom: 60px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: flex-start;
+          z-index: 2;
+        }
+        .hero-scroll {
           display: flex;
           flex-direction: column;
-          align-items: center;
-          gap: 8px;
-          animation: fadeIn 1s ease 1.5s both;
+          gap: 12px;
         }
-        .scroll-ind-text {
-          font-size: 0.7rem;
-          letter-spacing: 0.14em;
+        .scroll-text {
+          font-size: 0.65rem;
           text-transform: uppercase;
-          color: var(--text-dim);
+          letter-spacing: 0.2em;
+          color: var(--on-surface-variant);
+          opacity: 0.6;
         }
-        .scroll-ind-line {
-          width: 1px;
-          height: 50px;
-          background: linear-gradient(to bottom, var(--gold), transparent);
-          animation: scrollLine 1.5s ease infinite;
+        .scroll-line {
+          width: 80px;
+          height: 1px;
+          background: linear-gradient(to right, var(--primary-container), transparent);
+          transform-origin: left;
+          animation: lineScale 2s infinite ease-in-out;
         }
-        @keyframes scrollLine {
-          0% { transform: scaleY(0); transform-origin: top; }
-          50% { transform: scaleY(1); transform-origin: top; }
-          51% { transform-origin: bottom; }
-          100% { transform: scaleY(0); transform-origin: bottom; }
+        
+        @keyframes lineScale {
+          0%, 100% { transform: scaleX(0.5); opacity: 0.4; }
+          50% { transform: scaleX(1.2); opacity: 1; }
         }
 
-        @media (max-width: 640px) {
-          #hero { padding: 100px 20px 60px; }
-          .hero-ctas { flex-direction: column; }
+        @media (max-width: 1024px) {
+          .display-lg { font-size: 4rem; }
         }
+        @media (max-width: 768px) {
+          #hero { padding-top: 100px; }
+          .hero-title { font-size: 2.75rem; line-height: 1.2; }
+          .hero-desc { font-size: 1rem; margin-bottom: 48px; }
+          .hero-ctas { flex-direction: column; width: 100%; }
+          .hero-ctas :global(.btn-primary), 
+          .hero-ctas :global(.btn-ghost) { width: 100%; text-align: center; }
+          .hero-footer { bottom: 40px; }
+        }
+        @media (max-width: 480px) {
+          .hero-title { font-size: 2.2rem; }
+          .hero-label { font-size: 0.65rem; gap: 10px; }
+          .label-logo { width: 20px; height: 20px; }
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
       `}</style>
     </section>
   );

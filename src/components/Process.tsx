@@ -1,124 +1,136 @@
 "use client";
 
-import useReveal from "@/hooks/useReveal";
+import { useEffect } from "react";
 
 const steps = [
   {
-    title: "Discovery & Strategy",
-    desc: "We begin by deeply understanding your business goals, target audience, and technical requirements to build a solid roadmap."
+    title: "Intelligence Gathering",
+    num: "α",
+    desc: "A deep dive into the business's DNA, identifying hidden bottlenecks and mapping a technical route for strategic advantage."
   },
   {
-    title: "Engineering & Dev",
-    desc: "This is where precision meets code. We build your solution using modern frameworks, ensuring stability and performance at every layer."
+    title: "Structural Synthesis",
+    num: "β",
+    desc: "Architecting the infrastructure. We build with a focus on code integrity, ensuring a foundation that supports scale and cinematic performance."
   },
   {
-    title: "AI & Innovation Labs",
-    desc: "We integrate custom AI models/agents and smart automations to give your product a competitive technological edge."
+    title: "AI Integration",
+    num: "γ",
+    desc: "Injecting bespoke AI multi-agent logic. We transform static platforms into living, evolving artifacts of automated intelligence."
   },
   {
-    title: "Scale & Optimize",
-    desc: "Continuous monitoring, SEO fine-tuning, and infrastructure scaling to ensure your platform grows with your business."
+    title: "Constant Evolution",
+    num: "δ",
+    desc: "The launch is simply the inception. Continuous SEO optimization and recursive logic refinement to ensure long-term brand dominance."
   }
 ];
 
 export default function Process() {
-  const containerRef = useReveal();
+  useEffect(() => {
+    const handleReveal = () => {
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    handleReveal();
+    window.addEventListener("scroll", handleReveal);
+    return () => window.removeEventListener("scroll", handleReveal);
+  }, []);
 
   return (
-    <section id="process" ref={containerRef}>
+    <section id="process">
       <div className="container">
         <div className="process-header">
           <span className="section-label reveal">The Method</span>
-          <h2 className="section-title reveal">
-            A Blueprint for <em>Success</em>.
+          <h2 className="section-title reveal delay-1">
+            A Blueprint for <em className="serif">Absolute Success</em>.
           </h2>
-          <p className="section-desc reveal">
-            Our systematic approach ensures every project is delivered with engineering precision and strategic foresight.
-          </p>
         </div>
 
-        <div className="process-steps">
+        <div className="process-list">
           {steps.map((step, index) => (
-            <div key={index} className={`step-item reveal delay-${index + 1}`}>
-              <div className="step-num">0{index + 1}</div>
-              <div className="step-content">
-                <h3 className="step-title">{step.title}</h3>
-                <p className="step-desc">{step.desc}</p>
+            <div key={index} className="process-item reveal">
+              <div className="item-meta">
+                <span className="item-num serif">{step.num}</span>
+                <div className="item-connector"></div>
               </div>
-              <div className="step-connector"></div>
+              <div className="item-content">
+                <h3 className="item-title serif">{step.title}</h3>
+                <p className="item-desc">{step.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <style jsx>{`
+        #process {
+          background: var(--surface);
+          border-top: 1px solid var(--glass-border);
+        }
         .process-header {
+          margin-bottom: 120px;
           text-align: center;
-          margin-bottom: 100px;
         }
-        .process-header .section-desc {
+        .process-list {
+          max-width: 900px;
           margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 64px;
         }
-        
-        .process-steps {
+        .process-item {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 30px;
-          position: relative;
+          grid-template-columns: 80px 1fr;
+          gap: 60px;
+          align-items: flex-start;
+        }
+        .item-meta {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .item-num {
+          font-size: 1.8rem;
+          color: var(--primary-container);
+          font-weight: 400;
+          margin-bottom: 24px;
+        }
+        .item-connector {
+          width: 1px;
+          height: 100px;
+          background: linear-gradient(to bottom, var(--primary-container), transparent);
+          opacity: 0.3;
+        }
+        .process-item:last-child .item-connector {
+          display: none;
         }
         
-        .step-item {
-          position: relative;
-          background: var(--dark-2);
-          border: 1px solid var(--glass-border);
-          padding: 40px;
-          border-radius: 24px;
-          height: 100%;
-          transition: transform 0.4s var(--transition);
+        .item-title {
+          font-size: 1.75rem;
+          font-weight: 500;
+          margin-bottom: 20px;
+          color: var(--on-surface);
         }
-        .step-item:hover {
-          transform: translateY(-10px);
-          border-color: var(--gold);
-        }
-        
-        .step-num {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 3rem;
-          font-weight: 700;
-          color: rgba(201,168,76,0.1);
-          position: absolute;
-          top: 20px;
-          right: 30px;
-          transition: color 0.4s;
-        }
-        .step-item:hover .step-num {
-          color: rgba(201,168,76,0.3);
-        }
-        
-        .step-content {
-          position: relative;
-          z-index: 1;
-        }
-        .step-title {
-          font-size: 1.25rem;
-          font-weight: 600;
-          color: var(--gold-light);
-          margin-bottom: 16px;
-        }
-        .step-desc {
-          font-size: 0.9rem;
-          color: var(--text-dim);
-          line-height: 1.7;
+        .item-desc {
+          font-size: 1.05rem;
+          color: var(--on-surface-variant);
+          line-height: 1.8;
           font-weight: 300;
+          max-width: 600px;
         }
-        
-        @media (max-width: 1200px) {
-          .process-steps { grid-template-columns: repeat(2, 1fr); }
+
+        @media (max-width: 768px) {
+          .process-item { grid-template-columns: 60px 1fr; gap: 32px; }
+          .item-title { font-size: 1.4rem; }
+          .item-desc { font-size: 0.95rem; }
         }
-        @media (max-width: 640px) {
-          .process-steps { grid-template-columns: 1fr; }
-          .step-item { padding: 30px; }
-        }
+
+        .delay-1 { transition-delay: 0.1s; }
       `}</style>
     </section>
   );

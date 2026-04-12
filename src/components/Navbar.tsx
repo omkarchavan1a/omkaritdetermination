@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,42 +15,48 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
-    <nav className={isScrolled ? "scrolled" : ""} id="navbar">
-      <Link href="#hero" className="nav-logo">
-        <img
-          src="/logo.jpg"
-          alt="Omkar IT Determination Logo"
-          className="nav-logo-img"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = "none";
-            const span = (e.target as HTMLImageElement).nextElementSibling as HTMLSpanElement;
-            if (span) span.style.display = "block";
-          }}
-        />
-        <span className="nav-logo-text" style={{ display: "block" }}>
-          Omkar IT Determination
-        </span>
-      </Link>
-      <ul className="nav-links">
-        <li>
-          <Link href="#about">About</Link>
-        </li>
-        <li>
-          <Link href="#services">Services</Link>
-        </li>
-        <li>
-          <Link href="#portfolio">Work</Link>
-        </li>
-        <li>
-          <Link href="#process">Process</Link>
-        </li>
-        <li>
-          <Link href="#contact" className="nav-cta">
-            Let's Talk
-          </Link>
-        </li>
-      </ul>
+    <nav className={`${isScrolled ? "scrolled" : ""} ${isMenuOpen ? "menu-open" : ""}`} id="navbar">
+      <div className="nav-container">
+        <Link href="#hero" className="nav-logo" onClick={() => setIsMenuOpen(false)}>
+          <img 
+            src="/logo.jpg" 
+            alt="Logo" 
+            className="logo-img" 
+            onError={(e) => (e.currentTarget.style.display = 'none')}
+          />
+          <span className="logo-text serif">Omkar IT Determination</span>
+        </Link>
+
+        {/* Desktop Links */}
+        <ul className="nav-links desktop-only">
+          <li><Link href="#about">The Founder</Link></li>
+          <li><Link href="#services">Expertise</Link></li>
+          <li><Link href="#portfolio">Artifacts</Link></li>
+          <li><Link href="#process">Method</Link></li>
+          <li><Link href="#contact" className="nav-cta">Get in Touch</Link></li>
+        </ul>
+
+        {/* Mobile Toggle */}
+        <button className="mobile-toggle" onClick={toggleMenu} aria-label="Toggle Menu">
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu ${isMenuOpen ? "active" : ""}`}>
+        <ul className="mobile-nav-links">
+          <li><Link href="#about" onClick={toggleMenu}>The Founder</Link></li>
+          <li><Link href="#services" onClick={toggleMenu}>Expertise</Link></li>
+          <li><Link href="#portfolio" onClick={toggleMenu}>Artifacts</Link></li>
+          <li><Link href="#process" onClick={toggleMenu}>Method</Link></li>
+          <li><Link href="#contact" className="btn-primary" onClick={toggleMenu}>Get in Touch</Link></li>
+        </ul>
+      </div>
 
       <style jsx>{`
         nav {
@@ -57,96 +64,141 @@ export default function Navbar() {
           top: 0;
           left: 0;
           right: 0;
-          z-index: 100;
+          z-index: 1000;
+          padding: 32px 0;
+          transition: all 0.6s var(--transition);
+        }
+        nav.scrolled {
+          padding: 16px 0;
+          background: rgba(19, 19, 19, 0.7);
+          backdrop-filter: blur(24px);
+          border-bottom: 1px solid var(--glass-border);
+        }
+        .nav-container {
+          max-width: 1400px;
+          margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 20px 60px;
-          transition: padding 0.4s, background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
-        }
-        nav.scrolled {
-          padding: 14px 60px;
-          background: rgba(10, 10, 12, 0.85);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid var(--glass-border);
+          padding: 0 80px;
+          position: relative;
+          z-index: 1100;
         }
         .nav-logo {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 16px;
           text-decoration: none;
         }
-        .nav-logo-img {
-          width: 40px;
-          height: 40px;
+        .logo-img {
+          width: 38px;
+          height: 38px;
           border-radius: 50%;
-          border: 1.5px solid var(--gold);
+          border: 1px solid var(--primary-container);
           object-fit: cover;
         }
-        .nav-logo-text {
-          font-family: "Cormorant Garamond", serif;
-          font-style: italic;
-          font-size: 1.1rem;
-          color: var(--gold);
-          letter-spacing: 0.02em;
+        .logo-text {
+          font-size: 1.15rem;
+          color: var(--primary-container);
+          letter-spacing: -0.01em;
+          font-weight: 500;
         }
+
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 36px;
+          gap: 40px;
           list-style: none;
         }
         .nav-links :global(a) {
           text-decoration: none;
-          color: var(--text-dim);
-          font-size: 0.85rem;
+          color: var(--on-surface-variant);
+          font-size: 0.75rem;
           font-weight: 500;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          transition: color 0.3s;
-          position: relative;
+          transition: all 0.3s ease;
         }
-        .nav-links :global(a)::after {
-          content: "";
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          width: 0;
-          height: 1px;
-          background: var(--gold);
-          transition: width 0.3s;
-        }
-        .nav-links :global(a):hover {
-          color: var(--gold);
-        }
-        .nav-links :global(a):hover::after {
-          width: 100%;
-        }
+        .nav-links :global(a):hover { color: var(--primary); }
+
         .nav-cta {
           padding: 10px 24px;
-          border: 1px solid var(--gold);
-          border-radius: 50px;
-          color: var(--gold) !important;
-          font-size: 0.82rem !important;
-          letter-spacing: 0.1em !important;
-          transition: background 0.3s, color 0.3s !important;
+          border: 1px solid var(--primary-container);
+          border-radius: var(--radius-sm);
+          color: var(--primary-container) !important;
         }
         .nav-cta:hover {
-          background: var(--gold) !important;
-          color: var(--dark) !important;
-        }
-        .nav-cta::after {
-          display: none !important;
+          background: var(--primary-container);
+          color: var(--surface) !important;
         }
 
-        @media (max-width: 1024px) {
-          nav { padding: 18px 32px; }
-          nav.scrolled { padding: 12px 32px; }
+        /* Mobile Controls */
+        .mobile-toggle {
+          display: none;
+          background: none;
+          border: none;
+          cursor: pointer;
+          flex-direction: column;
+          gap: 6px;
+          padding: 10px;
         }
-        @media (max-width: 640px) {
-          nav { padding: 16px 20px; }
-          nav.scrolled { padding: 12px 20px; }
-          .nav-links { display: none; }
+        .bar {
+          width: 24px;
+          height: 1px;
+          background: var(--primary-container);
+          transition: all 0.4s var(--transition);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background: var(--surface);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transform: translateY(-100%);
+          transition: transform 0.6s var(--transition);
+          z-index: 1050;
+        }
+        .mobile-menu.active { transform: translateY(0); }
+        .mobile-nav-links {
+          list-style: none;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+        }
+        .mobile-nav-links :global(a) {
+          font-family: 'Noto Serif', serif;
+          font-size: 2rem;
+          text-decoration: none;
+          color: var(--on-surface);
+          transition: color 0.3s;
+        }
+        .mobile-nav-links :global(a):hover { color: var(--primary-container); }
+
+        @media (max-width: 1024px) {
+          .nav-container { padding: 0 40px; }
+          .nav-links { gap: 24px; }
+        }
+        @media (max-width: 850px) {
+          .desktop-only { display: none; }
+          .mobile-toggle { display: flex; }
+          
+          /* Hamburger Animation */
+          nav.menu-open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+          nav.menu-open .bar:nth-child(2) { opacity: 0; }
+          nav.menu-open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+          
+          .logo-text { font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+          .nav-container { padding: 0 24px; }
+          .logo-text { display: none; }
         }
       `}</style>
     </nav>

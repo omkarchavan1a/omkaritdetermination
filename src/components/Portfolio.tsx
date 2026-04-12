@@ -1,214 +1,220 @@
 "use client";
 
-import useReveal from "@/hooks/useReveal";
+import { useEffect } from "react";
 
 const projects = [
   {
     title: "The Cafe Elite",
-    category: "Business Promotion",
-    tags: ["Web Design", "Instagram Marketing", "SEO"],
-    desc: "Full website design crafted to mirror the brand's premium café experience, integrated with a cohesive Instagram marketing strategy for maximum reach and engagement.",
+    category: "Hospitality Architecture",
+    tags: ["Full Stack", "SEO Architecture", "Social Strategy"],
+    desc: "A digital translation of a premium café experience. Beyond pure code, this artifact synchronizes the brand's digital presence with its physical atmosphere.",
     favicon: "https://www.google.com/s2/favicons?sz=128&domain=the-cafe-elite.vercel.app",
     link: "https://the-cafe-elite.vercel.app/"
   },
   {
     title: "Shreetej Properties",
-    category: "Real Estate Portal",
-    tags: ["Next.js", "Quotation System", "SEO"],
-    desc: "A comprehensive real estate portal featuring technical implementation of custom quotation systems, detailed address configurations, and Google Search Console ranking.",
+    category: "Enterprise Real Estate",
+    tags: ["Next.js", "Logic Engine", "Vercel"],
+    desc: "A structural real estate portal featuring custom dynamic quotation systems and precision-engineered search console integration for organic dominance.",
     favicon: "https://www.google.com/s2/favicons?sz=128&domain=shreetejproperties.com",
     link: "https://www.shreetejproperties.com/"
   }
 ];
 
 export default function Portfolio() {
-  const containerRef = useReveal();
+  useEffect(() => {
+    const handleReveal = () => {
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    handleReveal();
+    window.addEventListener("scroll", handleReveal);
+    return () => window.removeEventListener("scroll", handleReveal);
+  }, []);
 
   return (
-    <section id="portfolio" ref={containerRef}>
+    <section id="portfolio">
       <div className="container">
         <div className="portfolio-header">
-          <div className="header-text">
-            <span className="section-label reveal">Recent Work</span>
-            <h2 className="section-title reveal">
-              Selected <em>Artifacts</em><br />of Engineering.
-            </h2>
-          </div>
-          <p className="section-desc reveal">
-            Real-world projects that prove reliability, technical skill, and measurable results for every client.
-          </p>
+          <span className="section-label reveal">The Collection</span>
+          <h2 className="section-title reveal delay-1">
+            Selected <em>Artifacts</em><br />of Digital Engineering.
+          </h2>
         </div>
 
         <div className="portfolio-grid">
           {projects.map((project, index) => (
-            <div key={index} className={`project-card reveal delay-${index + 1}`}>
-              <div className="project-logo-strip">
-                <img
-                  src={project.favicon}
-                  alt={`${project.title} logo`}
-                  className="project-site-logo"
-                />
-                <span className="project-site-name">{project.title}</span>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-visit-badge">
-                  Live ↗
-                </a>
-              </div>
-              <div className="project-details">
-                <div className="project-meta">
-                  <span className="project-category">{project.category}</span>
-                  <div className="project-tags">
+            <div key={index} className={`project-artifact reveal delay-${index + 1}`}>
+              <div className="artifact-top">
+                <div className="artifact-meta">
+                  <span className="artifact-cat">{project.category}</span>
+                  <div className="artifact-tags">
                     {project.tags.map((tag, tIndex) => (
-                      <span key={tIndex} className="tag-chip">{tag}</span>
+                      <span key={tIndex} className="tag">{tag}</span>
                     ))}
                   </div>
                 </div>
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-desc">{project.desc}</p>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-live-link">
-                  Visit Live Site →
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="artifact-link">
+                  Visit Project ↗
                 </a>
               </div>
+              
+              <div className="artifact-main">
+                <div className="artifact-icon-box">
+                   <img
+                    src={project.favicon}
+                    alt={`${project.title} logo`}
+                    className="artifact-icon"
+                  />
+                </div>
+                <div className="artifact-text">
+                  <h3 className="artifact-title serif">{project.title}</h3>
+                  <p className="artifact-desc">{project.desc}</p>
+                </div>
+              </div>
+
+              <div className="artifact-bottom-glass"></div>
             </div>
           ))}
         </div>
       </div>
 
       <style jsx>{`
-        .portfolio-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          margin-bottom: 80px;
-          gap: 60px;
+        #portfolio {
+          background: var(--surface-low);
+          border-top: 1px solid var(--glass-border);
         }
-        .header-text { max-width: 600px; }
-        
+        .portfolio-header {
+          margin-bottom: 80px;
+        }
         .portfolio-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 48px;
+          gap: 32px;
         }
-        
-        .project-card {
+        .project-artifact {
+          background: var(--surface);
+          border: 1px solid var(--glass-border);
+          padding: 56px;
           position: relative;
-          background: var(--dark-2);
-          border-radius: 32px;
-          border: 1px solid var(--glass-border);
-          overflow: hidden;
-          transition: transform 0.5s var(--transition);
-        }
-        .project-card:hover {
-          transform: translateY(-8px);
-        }
-        
-        .project-logo-strip {
           display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 28px 36px;
-          background: rgba(201,168,76,0.04);
-          border-bottom: 1px solid var(--glass-border);
+          flex-direction: column;
+          gap: 60px;
+          transition: all 0.6s var(--transition);
+          overflow: hidden;
         }
-        .project-site-logo {
-          width: 52px;
-          height: 52px;
-          border-radius: 12px;
-          border: 1px solid var(--glass-border);
-          background: var(--dark-3);
-          object-fit: contain;
-          padding: 4px;
-          flex-shrink: 0;
+        .project-artifact:hover {
+          border-color: var(--primary-container);
+          transform: scale(1.02);
         }
-        .project-site-name {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: var(--text);
-          flex: 1;
-        }
-        .project-visit-badge {
-          padding: 6px 16px;
-          border: 1px solid var(--gold);
-          border-radius: 50px;
-          font-size: 0.72rem;
-          font-weight: 700;
-          color: var(--gold);
-          text-decoration: none;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          transition: background 0.3s, color 0.3s;
-          white-space: nowrap;
-        }
-        .project-visit-badge:hover {
-          background: var(--gold);
-          color: var(--dark);
-        }
-        
-        .project-details {
-          padding: 36px;
-        }
-        .project-meta {
+        .artifact-top {
           display: flex;
           justify-content: space-between;
-          align-items: center;
-          margin-bottom: 16px;
+          align-items: flex-start;
+          z-index: 2;
         }
-        .project-category {
-          font-size: 0.75rem;
-          color: var(--gold);
+        .artifact-cat {
+          font-size: 0.7rem;
           text-transform: uppercase;
-          font-weight: 700;
           letter-spacing: 0.15em;
+          color: var(--primary-container);
+          font-weight: 600;
+          display: block;
+          margin-bottom: 12px;
         }
-        .project-tags {
+        .artifact-tags {
           display: flex;
           gap: 8px;
         }
-        .tag-chip {
-          padding: 4px 12px;
-          border-radius: 50px;
-          border: 1px solid var(--glass-border);
-          font-size: 0.65rem;
-          color: var(--text-dim);
-          background: var(--glass);
+        .artifact-tags .tag {
+          font-size: 0.6rem;
+          color: var(--on-surface-variant);
+          opacity: 0.6;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
-        .project-title {
-          font-family: 'Cormorant Garamond', serif;
+        .artifact-link {
+          font-size: 0.8rem;
+          color: var(--on-surface);
+          text-decoration: none;
+          font-weight: 500;
+          border-bottom: 1px solid var(--primary-container);
+          padding-bottom: 2px;
+          transition: opacity 0.3s;
+        }
+        .artifact-link:hover { opacity: 0.7; }
+        
+        .artifact-main {
+          display: grid;
+          grid-template-columns: 100px 1fr;
+          gap: 40px;
+          align-items: center;
+          z-index: 2;
+        }
+        .artifact-icon-box {
+          width: 100px;
+          height: 100px;
+          background: var(--surface-container);
+          border: 1px solid var(--glass-border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
+        .artifact-icon {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          filter: grayscale(1);
+          opacity: 0.7;
+          transition: all 0.6s var(--transition);
+        }
+        .project-artifact:hover .artifact-icon {
+          filter: grayscale(0);
+          opacity: 1;
+        }
+        .artifact-title {
           font-size: 2.2rem;
-          font-weight: 600;
-          color: var(--text);
+          font-weight: 400;
           margin-bottom: 16px;
         }
-        .project-desc {
-          font-size: 0.9rem;
-          color: var(--text-dim);
-          line-height: 1.65;
+        .artifact-desc {
+          font-size: 0.95rem;
+          color: var(--on-surface-variant);
+          line-height: 1.8;
           font-weight: 300;
-          margin-bottom: 24px;
         }
-        .project-live-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 0.8rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: var(--gold);
-          text-decoration: none;
-          transition: gap 0.3s, opacity 0.3s;
-        }
-        .project-live-link:hover { gap: 14px; opacity: 0.8; }
 
-        @media (max-width: 1024px) {
-          .portfolio-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+        .artifact-bottom-glass {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 8px;
+          background: linear-gradient(to right, var(--primary-container), transparent);
+          opacity: 0;
+          transition: opacity 0.6s var(--transition);
+        }
+        .project-artifact:hover .artifact-bottom-glass {
+          opacity: 0.6;
+        }
+
+        @media (max-width: 1100px) {
           .portfolio-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 640px) {
-          .project-details { padding: 24px; }
-          .project-title { font-size: 1.8rem; }
-          .project-meta { flex-direction: column; align-items: flex-start; gap: 12px; }
+          .project-artifact { padding: 40px 30px; gap: 40px; }
+          .artifact-main { grid-template-columns: 1fr; gap: 30px; }
+          .artifact-icon-box { width: 80px; height: 80px; }
+          .artifact-title { font-size: 1.75rem; }
         }
+
+        .delay-1 { transition-delay: 0.1s; }
       `}</style>
     </section>
   );
