@@ -137,16 +137,11 @@ export default function Hero() {
           animation: fadeInDown 0.8s ease 0.1s both;
         }
         .hero-logo-badge img {
-          width: 90px;
-          height: 90px;
+          width: 120px;
+          height: 120px;
           border-radius: 50%;
           border: 2px solid var(--gold);
           box-shadow: 0 0 40px rgba(201,168,76,0.25);
-          animation: floatAndRotate 6s ease-in-out infinite;
-        }
-        @keyframes floatAndRotate {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-12px) rotate(180deg); }
         }
         .scroll-ind {
           position: absolute;

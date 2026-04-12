@@ -16,7 +16,7 @@ export default function Footer() {
                   (e.target as HTMLImageElement).style.display = "none";
                 }}
               />
-              <span className="footer-logo-text">Omkar.</span>
+              <span className="footer-logo-text">Omkar IT Determination</span>
             </Link>
             <p className="footer-tagline">
               Transforming complex problems into seamless digital experiences through precision engineering, AI innovation, and strategic determination.
@@ -89,16 +89,11 @@ export default function Footer() {
           height: 40px;
           border-radius: 50%;
           border: 1px solid var(--gold);
-          animation: slowRotateFooter 25s linear infinite;
-        }
-        @keyframes slowRotateFooter {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
         }
         .footer-logo-text {
           font-family: 'Cormorant Garamond', serif;
           font-style: italic;
-          font-size: 1.5rem;
+          font-size: 1.3rem;
           color: var(--gold);
         }
         .footer-tagline {

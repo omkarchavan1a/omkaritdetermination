@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Cursor from "@/components/Cursor";
 import Preloader from "@/components/Preloader";
-import Particles from "@/components/Particles";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -31,8 +29,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${outfit.className}`}>
         <Preloader />
-        <Cursor />
-        <Particles />
         {children}
       </body>
     </html>

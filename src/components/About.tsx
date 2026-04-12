@@ -141,10 +141,10 @@ export default function About() {
           object-fit: cover;
           border-radius: 16px;
           filter: grayscale(0.2) contrast(1.1);
-          transition: transform 0.8s var(--transition), filter 0.6s;
+          transition: transform 0.6s var(--transition);
         }
         .about-img-frame:hover .about-img {
-          transform: scale(1.05) rotate(5deg);
+          transform: scale(1.03);
           filter: grayscale(0) contrast(1);
         }
         .floating-badge {
@@ -155,11 +155,6 @@ export default function About() {
           padding: 24px;
           border-radius: 20px;
           box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-          animation: float 4s ease-in-out infinite;
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
         }
         .badge-inner {
           display: flex;

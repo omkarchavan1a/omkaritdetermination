@@ -8,7 +8,7 @@ const projects = [
     category: "Business Promotion",
     tags: ["Web Design", "Instagram Marketing", "SEO"],
     desc: "Full website design crafted to mirror the brand's premium café experience, integrated with a cohesive Instagram marketing strategy for maximum reach and engagement.",
-    img: "/logo.jpg",
+    favicon: "https://www.google.com/s2/favicons?sz=128&domain=the-cafe-elite.vercel.app",
     link: "https://the-cafe-elite.vercel.app/"
   },
   {
@@ -16,7 +16,7 @@ const projects = [
     category: "Real Estate Portal",
     tags: ["Next.js", "Quotation System", "SEO"],
     desc: "A comprehensive real estate portal featuring technical implementation of custom quotation systems, detailed address configurations, and Google Search Console ranking.",
-    img: "/logo.jpg",
+    favicon: "https://www.google.com/s2/favicons?sz=128&domain=shreetejproperties.com",
     link: "https://www.shreetejproperties.com/"
   }
 ];
@@ -42,19 +42,16 @@ export default function Portfolio() {
         <div className="portfolio-grid">
           {projects.map((project, index) => (
             <div key={index} className={`project-card reveal delay-${index + 1}`}>
-              <div className="project-img-wrap">
+              <div className="project-logo-strip">
                 <img
-                  src={project.img}
-                  alt={project.title}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = "none";
-                  }}
+                  src={project.favicon}
+                  alt={`${project.title} logo`}
+                  className="project-site-logo"
                 />
-                <div className="project-overlay">
-                  <a href={project.link} className="view-project-btn">
-                    Explore Case Study
-                  </a>
-                </div>
+                <span className="project-site-name">{project.title}</span>
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-visit-badge">
+                  Live ↗
+                </a>
               </div>
               <div className="project-details">
                 <div className="project-meta">
@@ -104,52 +101,47 @@ export default function Portfolio() {
           transform: translateY(-8px);
         }
         
-        .project-img-wrap {
-          position: relative;
-          aspect-ratio: 16/9;
-          overflow: hidden;
-          background: var(--dark-3);
-        }
-        .project-img-wrap img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.8s var(--transition);
-        }
-        .project-card:hover img {
-          transform: scale(1.1);
-        }
-        
-        .project-overlay {
-          position: absolute;
-          inset: 0;
-          background: rgba(10,10,12,0.6);
-          backdrop-filter: blur(4px);
+        .project-logo-strip {
           display: flex;
           align-items: center;
-          justify-content: center;
-          opacity: 0;
-          transition: opacity 0.4s;
+          gap: 16px;
+          padding: 28px 36px;
+          background: rgba(201,168,76,0.04);
+          border-bottom: 1px solid var(--glass-border);
         }
-        .project-card:hover .project-overlay {
-          opacity: 1;
+        .project-site-logo {
+          width: 52px;
+          height: 52px;
+          border-radius: 12px;
+          border: 1px solid var(--glass-border);
+          background: var(--dark-3);
+          object-fit: contain;
+          padding: 4px;
+          flex-shrink: 0;
         }
-        
-        .view-project-btn {
-          padding: 16px 32px;
+        .project-site-name {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text);
+          flex: 1;
+        }
+        .project-visit-badge {
+          padding: 6px 16px;
+          border: 1px solid var(--gold);
+          border-radius: 50px;
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: var(--gold);
+          text-decoration: none;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          transition: background 0.3s, color 0.3s;
+          white-space: nowrap;
+        }
+        .project-visit-badge:hover {
           background: var(--gold);
           color: var(--dark);
-          text-decoration: none;
-          border-radius: 50px;
-          font-weight: 700;
-          font-size: 0.85rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          transform: translateY(20px);
-          transition: transform 0.4s;
-        }
-        .project-card:hover .view-project-btn {
-          transform: translateY(0);
         }
         
         .project-details {
