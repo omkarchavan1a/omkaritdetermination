@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import useReveal from "@/hooks/useReveal";
+import { sendEmail } from "@/app/actions";
 
 export default function Contact() {
   const containerRef = useReveal();
@@ -14,21 +15,14 @@ export default function Contact() {
     setResult("Sending...");
     
     const formData = new FormData(event.currentTarget);
-    formData.append("access_key", "e0a60e70-b401-4f02-bab1-7a4e76aa5f54");
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await response.json();
+      const data = await sendEmail(formData);
 
       if (data.success) {
-        setResult("Form Submitted Successfully!");
+        setResult("Inquiry sent successfully!");
         (event.target as HTMLFormElement).reset();
       } else {
-        console.log("Error", data);
         setResult(data.message);
       }
     } catch (error) {
