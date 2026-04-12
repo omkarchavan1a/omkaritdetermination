@@ -3,19 +3,29 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --gold: #C9A84C;
-  --gold-light: #E8C96D;
-  --gold-pale: #F5E6B8;
-  --saffron: #FF6F00;
-  --saffron-light: #FFA040;
-  --dark: #0A0A0C;
-  --dark-2: #111114;
-  --dark-3: #1A1A20;
-  --dark-4: #252530;
-  --glass: rgba(255,255,255,0.04);
-  --glass-border: rgba(201,168,76,0.18);
-  --text: #F0EDE6;
-  --text-dim: #9A9490;
+  /* ── Primary Accent: Electric Cyan ── */
+  --gold: #00C9FF;
+  --gold-light: #5EDFFF;
+  --gold-pale: #B8F3FF;
+
+  /* ── Secondary Accent: Violet ── */
+  --saffron: #7C3AED;
+  --saffron-light: #A78BFA;
+
+  /* ── Dark Backgrounds ── */
+  --dark: #060A14;
+  --dark-2: #0B1120;
+  --dark-3: #111827;
+  --dark-4: #1E2A40;
+
+  /* ── Glass / Borders ── */
+  --glass: rgba(0,201,255,0.04);
+  --glass-border: rgba(0,201,255,0.15);
+
+  /* ── Text ── */
+  --text: #E8EDF5;
+  --text-dim: #7A8599;
+
   --radius: 16px;
   --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -33,7 +43,7 @@ body {
 /* ─── SCROLLBAR ─────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--dark-2); }
-::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--gold), var(--saffron)); border-radius: 4px; }
 
 /* ─── REVEAL ANIMATION ──────────────────────────────────────────── */
 .reveal {
@@ -83,7 +93,7 @@ section { padding: 120px 60px; }
 .btn-primary {
   padding: 16px 36px; border-radius: 50px;
   background: linear-gradient(135deg, var(--gold), var(--saffron));
-  color: var(--dark); font-weight: 700; font-size: 0.9rem;
+  color: #fff; font-weight: 700; font-size: 0.9rem;
   letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase;
   position: relative; overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -94,7 +104,7 @@ section { padding: 120px 60px; }
   background: linear-gradient(135deg, var(--gold-light), var(--gold));
   opacity: 0; transition: opacity 0.3s;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(201,168,76,0.35); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,201,255,0.3); }
 .btn-primary:hover::before { opacity: 1; }
 .btn-primary span { position: relative; z-index: 1; }
 
