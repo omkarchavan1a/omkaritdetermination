@@ -12,6 +12,7 @@ export default function Footer() {
               <img
                 src="/logo.jpg"
                 alt="Omkar IT Determination"
+                className="footer-logo-img"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = "none";
                 }}
@@ -83,18 +84,34 @@ export default function Footer() {
           gap: 12px;
           text-decoration: none;
           margin-bottom: 24px;
+          transition: transform 0.3s ease;
         }
-        .footer-logo img {
+        .footer-logo:hover {
+          transform: translateX(5px);
+        }
+        .footer-logo-img {
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          border: 1px solid var(--gold);
+          border: 1.5px solid var(--gold);
+          object-fit: cover;
+          transition: all 0.3s ease;
+          box-shadow: 0 0 0 rgba(212, 175, 55, 0);
+        }
+        .footer-logo:hover .footer-logo-img {
+          box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+          border-color: var(--text);
         }
         .footer-logo-text {
           font-family: 'Cormorant Garamond', serif;
           font-style: italic;
           font-size: 1.3rem;
           color: var(--gold);
+          letter-spacing: 0.02em;
+          transition: color 0.3s ease;
+        }
+        .footer-logo:hover .footer-logo-text {
+          color: var(--text);
         }
         .footer-tagline {
           color: var(--text-dim);
