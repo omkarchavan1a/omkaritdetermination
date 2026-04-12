@@ -4,25 +4,20 @@ import useReveal from "@/hooks/useReveal";
 
 const projects = [
   {
-    title: "AI-Driven Real Estate Platform",
-    category: "Web Engineering",
-    tags: ["Next.js", "GPT-4", "PostgreSQL"],
-    img: "/logo.jpg", // Placeholder
-    link: "#"
+    title: "The Cafe Elite",
+    category: "Business Promotion",
+    tags: ["Web Design", "Instagram Marketing", "SEO"],
+    desc: "Full website design crafted to mirror the brand's premium café experience, integrated with a cohesive Instagram marketing strategy for maximum reach and engagement.",
+    img: "/logo.jpg",
+    link: "https://the-cafe-elite.vercel.app/"
   },
   {
-    title: "Global Supply Chain Dashboard",
-    category: "System Architecture",
-    tags: ["React", "D3.js", "AWS"],
-    img: "/logo.jpg", // Placeholder
-    link: "#"
-  },
-  {
-    title: "Strategic Growth Portal",
-    category: "Digital Strategy",
-    tags: ["SEO", "Marketing API", "Next.js"],
-    img: "/logo.jpg", // Placeholder
-    link: "#"
+    title: "Shreetej Properties",
+    category: "Real Estate Portal",
+    tags: ["Next.js", "Quotation System", "SEO"],
+    desc: "A comprehensive real estate portal featuring technical implementation of custom quotation systems, detailed address configurations, and Google Search Console ranking.",
+    img: "/logo.jpg",
+    link: "https://www.shreetejproperties.com/"
   }
 ];
 
@@ -40,7 +35,7 @@ export default function Portfolio() {
             </h2>
           </div>
           <p className="section-desc reveal">
-            A curation of high-impact projects where precision engineering Meets strategic business objectives.
+            Real-world projects that prove reliability, technical skill, and measurable results for every client.
           </p>
         </div>
 
@@ -71,6 +66,10 @@ export default function Portfolio() {
                   </div>
                 </div>
                 <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.desc}</p>
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-live-link">
+                  Visit Live Site →
+                </a>
               </div>
             </div>
           ))}
@@ -91,9 +90,6 @@ export default function Portfolio() {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 48px;
-        }
-        .portfolio-grid .project-card:first-child {
-          grid-column: span 2;
         }
         
         .project-card {
@@ -189,12 +185,32 @@ export default function Portfolio() {
           font-size: 2.2rem;
           font-weight: 600;
           color: var(--text);
+          margin-bottom: 16px;
         }
+        .project-desc {
+          font-size: 0.9rem;
+          color: var(--text-dim);
+          line-height: 1.65;
+          font-weight: 300;
+          margin-bottom: 24px;
+        }
+        .project-live-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: var(--gold);
+          text-decoration: none;
+          transition: gap 0.3s, opacity 0.3s;
+        }
+        .project-live-link:hover { gap: 14px; opacity: 0.8; }
 
         @media (max-width: 1024px) {
           .portfolio-header { flex-direction: column; align-items: flex-start; gap: 20px; }
           .portfolio-grid { grid-template-columns: 1fr; }
-          .portfolio-grid .project-card:first-child { grid-column: span 1; }
         }
         @media (max-width: 640px) {
           .project-details { padding: 24px; }

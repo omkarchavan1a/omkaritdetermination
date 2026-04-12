@@ -19,7 +19,7 @@ export default function Footer() {
               <span className="footer-logo-text">Omkar.</span>
             </Link>
             <p className="footer-tagline">
-              Engineering the future of digital experiences with precision, innovation, and strategic determination.
+              Transforming complex problems into seamless digital experiences through precision engineering, AI innovation, and strategic determination.
             </p>
           </div>
 
@@ -36,18 +36,19 @@ export default function Footer() {
           <div className="footer-group">
             <h4 className="footer-label">Connect</h4>
             <ul className="footer-links">
-              <li><a href="https://wa.me/917588464644">WhatsApp</a></li>
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
+              <li><a href="https://wa.me/919096518451" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+              <li><a href="https://www.instagram.com/omkarchavann_" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://the-cafe-elite.vercel.app/" target="_blank" rel="noopener noreferrer">The Cafe Elite</a></li>
+              <li><a href="https://www.shreetejproperties.com/" target="_blank" rel="noopener noreferrer">Shreetej Properties</a></li>
             </ul>
           </div>
 
           <div className="footer-group">
             <h4 className="footer-label">Contact</h4>
             <ul className="footer-links">
-              <li><a href="mailto:omkarchavan1a@gmail.com">omkarchavan1a@gmail.com</a></li>
-              <li><a href="#">Sangamner, India</a></li>
+              <li><a href="mailto:omkarchavan1500@gmail.com">omkarchavan1500@gmail.com</a></li>
+              <li><a href="tel:+919096518451">+91 90965 18451</a></li>
+              <li><span style={{color: 'var(--text-dim)', fontSize: '0.9rem', fontWeight: 300}}>Sangamner, India</span></li>
             </ul>
           </div>
         </div>
@@ -88,6 +89,11 @@ export default function Footer() {
           height: 40px;
           border-radius: 50%;
           border: 1px solid var(--gold);
+          animation: slowRotateFooter 25s linear infinite;
+        }
+        @keyframes slowRotateFooter {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         .footer-logo-text {
           font-family: 'Cormorant Garamond', serif;

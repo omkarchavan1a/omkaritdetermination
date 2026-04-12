@@ -13,11 +13,11 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Omkar IT Determination | Founder & Lead Developer",
-  description: "Omkar Chavan — Founder & Lead Developer at Omkar IT Determination. Transforming complex problems into seamless digital experiences. Web development, AI integration, and SEO services.",
-  keywords: "Omkar IT Determination, web developer, Next.js developer, AI integration, SEO expert, Flask developer, Omkar Chavan",
+  description: "Omkar Chavan — Founder & Lead Developer at Omkar IT Determination. Providing high-quality websites, landing pages, IT software, AI chatbots, CrewAI multi-agent systems, and Google Search Console SEO services.",
+  keywords: "Omkar IT Determination, Omkar Chavan, web developer, Next.js developer, AI chatbot, CrewAI, multi-agent systems, SEO expert, Google Search Console, Instagram marketing, Flask developer, Python developer, The Cafe Elite, Shreetej Properties, Vercel, Hostinger, Sangamner",
   openGraph: {
     title: "Omkar IT Determination | Founder & Lead Developer",
-    description: "Transforming complex problems into seamless digital experiences.",
+    description: "Transforming complex problems into seamless digital experiences through web development, AI integration, and strategic SEO.",
     type: "website",
   },
 };

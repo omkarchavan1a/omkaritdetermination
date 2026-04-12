@@ -82,10 +82,17 @@ export default function Navbar() {
           border-radius: 50%;
           border: 1.5px solid var(--gold);
           object-fit: cover;
-          transition: transform 0.4s;
+          transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
+          animation: slowRotate 20s linear infinite;
         }
         .nav-logo:hover .nav-logo-img {
-          transform: rotate(360deg);
+          transform: rotate(360deg) scale(1.1);
+          animation-play-state: paused;
+          box-shadow: 0 0 20px rgba(201,168,76,0.3);
+        }
+        @keyframes slowRotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         .nav-logo-text {
           font-family: "Cormorant Garamond", serif;
@@ -93,6 +100,7 @@ export default function Navbar() {
           font-size: 1.3rem;
           color: var(--gold);
           letter-spacing: 0.02em;
+          display: none; /* Hidden by default, shown if image fails */
         }
         .nav-links {
           display: flex;

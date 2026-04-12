@@ -142,11 +142,11 @@ export default function Hero() {
           border-radius: 50%;
           border: 2px solid var(--gold);
           box-shadow: 0 0 40px rgba(201,168,76,0.25);
-          animation: floatLogo 4s ease-in-out infinite;
+          animation: floatAndRotate 6s ease-in-out infinite;
         }
-        @keyframes floatLogo {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+        @keyframes floatAndRotate {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-12px) rotate(180deg); }
         }
         .scroll-ind {
           position: absolute;

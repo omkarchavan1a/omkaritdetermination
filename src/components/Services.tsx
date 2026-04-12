@@ -4,22 +4,22 @@ import useReveal from "@/hooks/useReveal";
 
 const services = [
   {
-    title: "Web Engineering",
+    title: "Web Development",
     icon: "⚡",
-    desc: "Building high-performance, scalable web applications with Next.js and React.",
-    features: ["Custom Web Apps", "E-commerce Solutions", "Performance Optimization"]
+    desc: "Building high-quality websites, landing pages, and IT software with Next.js, HTML5, CSS3, and JavaScript — deployed on Vercel & Hostinger.",
+    features: ["Next.js & HTML/CSS Sites", "Landing Pages & Business Sites", "Vercel & Hostinger Deployments"]
   },
   {
-    title: "AI Integration",
+    title: "AI Services",
     icon: "🧠",
-    desc: "Implementing smart features and automation through LLMs and custom AI agents.",
-    features: ["AI Chatbots", "Predictive Analytics", "Process Automation"]
+    desc: "Designing custom chatbots and multi-agent automation systems using AI and CrewAI to streamline and supercharge your business processes.",
+    features: ["Custom AI Chatbots", "CrewAI Multi-Agent Systems", "Business Process Automation"]
   },
   {
-    title: "Growth Strategy",
+    title: "SEO & Social Media",
     icon: "📈",
-    desc: "Strategic SEO and digital marketing to ensure your product reaches the right audience.",
-    features: ["Advanced SEO", "Conversion Optimization", "Data Strategy"]
+    desc: "Ranking your Vercel-hosted site on Google Search Console, paired with high-impact Instagram carousels and reels that mirror your website's design.",
+    features: ["Google Search Console Ranking", "Instagram Carousels & Reels", "Brand Design Synergy"]
   }
 ];
 

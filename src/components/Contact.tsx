@@ -57,22 +57,21 @@ export default function Contact() {
                 <div className="channel-icon">📧</div>
                 <div className="channel-details">
                   <span className="channel-label">Email Us</span>
-                  <a href="mailto:omkarchavan1a@gmail.com" className="channel-link">omkarchavan1a@gmail.com</a>
+                  <a href="mailto:omkarchavan1500@gmail.com" className="channel-link">omkarchavan1500@gmail.com</a>
                 </div>
               </div>
               <div className="channel-card reveal delay-2">
                 <div className="channel-icon">📱</div>
                 <div className="channel-details">
-                  <span className="channel-label">Call/WhatsApp</span>
-                  <a href="https://wa.me/917588464644" className="channel-link">+91 75884 64644</a>
+                  <span className="channel-label">Call / WhatsApp</span>
+                  <a href="https://wa.me/919096518451" className="channel-link">+91 90965 18451</a>
                 </div>
               </div>
             </div>
 
             <div className="social-links reveal delay-3">
-              <a href="#" className="social-link">LinkedIn</a>
-              <a href="#" className="social-link">GitHub</a>
-              <a href="#" className="social-link">Twitter</a>
+              <a href="https://www.instagram.com/omkarchavann_" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
+              <a href="https://wa.me/919096518451" target="_blank" rel="noopener noreferrer" className="social-link">WhatsApp</a>
             </div>
           </div>
 

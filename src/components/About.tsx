@@ -12,28 +12,39 @@ export default function About() {
           <div className="about-info">
             <span className="section-label reveal">The Founder</span>
             <h2 className="section-title reveal">
-              Driven by <em>Precision</em>,<br />
-              Defined by Results.
+              Driven by <em>Determination</em>,<br />
+              Built for Results.
             </h2>
             <p className="section-desc reveal">
-              I'm Omkar Chavan, the founder of <strong>Omkar IT Determination</strong>. With a deep passion for clean architectural code and cutting-edge technology, I lead a team dedicated to pushing the boundaries of what's possible in the digital realm.
+              I'm Omkar Chavan, Founder & Lead Developer at <strong>Omkar IT Determination</strong>. I provide high-quality websites, landing pages, IT software, and AI-driven services — transforming complex problems into seamless digital experiences.
             </p>
             <p className="about-detailed reveal">
-              By merging creative vision with technical rigor, we build systems that don't just work—they excel. From complex AI integrations to high-performance web applications, my focus is always on engineering excellence and strategic growth for every partner we work with.
+              From ranking Vercel sites on Google Search Console to building CrewAI multi-agent systems and creating Instagram marketing strategies that mirror your brand — I deliver end-to-end digital excellence for every client.
             </p>
 
-            <div className="stat-row">
-              <div className="stat-card reveal delay-1">
-                <span className="stat-num">4+</span>
-                <span className="stat-label">Years of<br />Experience</span>
-              </div>
-              <div className="stat-card reveal delay-2">
-                <span className="stat-num">50+</span>
-                <span className="stat-label">Projects<br />Completed</span>
-              </div>
-              <div className="stat-card reveal delay-3">
-                <span className="stat-num">100%</span>
-                <span className="stat-label">Client<br />Satisfaction</span>
+            <div className="tech-arsenal reveal">
+              <span className="arsenal-label">Technical Arsenal</span>
+              <div className="arsenal-grid">
+                <div className="arsenal-item">
+                  <span className="arsenal-cat">Frontend</span>
+                  <span className="arsenal-techs">Next.js · HTML5 · CSS3 · Tailwind · JavaScript</span>
+                </div>
+                <div className="arsenal-item">
+                  <span className="arsenal-cat">Backend</span>
+                  <span className="arsenal-techs">Python · Flask · BeautifulSoup · Tkinter</span>
+                </div>
+                <div className="arsenal-item">
+                  <span className="arsenal-cat">Database</span>
+                  <span className="arsenal-techs">SQLite</span>
+                </div>
+                <div className="arsenal-item">
+                  <span className="arsenal-cat">Mobile / Env</span>
+                  <span className="arsenal-techs">Termux Development & Troubleshooting</span>
+                </div>
+                <div className="arsenal-item">
+                  <span className="arsenal-cat">Marketing & SEO</span>
+                  <span className="arsenal-techs">Google Search Console · Vercel · Hostinger · Instagram</span>
+                </div>
               </div>
             </div>
           </div>
@@ -51,12 +62,12 @@ export default function About() {
               <div className="floating-badge">
                 <div className="badge-inner">
                   <span className="badge-year">Est. 2021</span>
-                  <span className="badge-title">Engineering Excellence</span>
+                  <span className="badge-title">Omkar IT Determination</span>
                 </div>
               </div>
             </div>
             <div className="experience-pill">
-              Expertise in Next.js & AI
+              Next.js · AI · SEO
             </div>
           </div>
         </div>
@@ -73,32 +84,44 @@ export default function About() {
           color: var(--text-dim);
           font-size: 1rem;
           line-height: 1.8;
-          margin: 24px 0 48px;
+          margin: 24px 0 40px;
           font-weight: 300;
         }
-        .stat-row {
-          display: flex;
-          gap: 40px;
-          padding-top: 40px;
+        .tech-arsenal {
+          padding-top: 36px;
           border-top: 1px solid var(--glass-border);
         }
-        .stat-card {
+        .arsenal-label {
+          display: block;
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 0.16em;
+          color: var(--gold);
+          font-weight: 700;
+          margin-bottom: 20px;
+        }
+        .arsenal-grid {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 14px;
         }
-        .stat-num {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 2.5rem;
-          font-weight: 700;
-          color: var(--gold);
-          line-height: 1;
+        .arsenal-item {
+          display: grid;
+          grid-template-columns: 130px 1fr;
+          gap: 12px;
+          align-items: baseline;
         }
-        .stat-label {
+        .arsenal-cat {
           font-size: 0.75rem;
-          color: var(--text-dim);
           text-transform: uppercase;
           letter-spacing: 0.1em;
+          color: var(--text-dim);
+          font-weight: 600;
+        }
+        .arsenal-techs {
+          font-size: 0.88rem;
+          color: var(--text);
+          font-weight: 300;
           line-height: 1.4;
         }
         .about-media {
@@ -118,10 +141,10 @@ export default function About() {
           object-fit: cover;
           border-radius: 16px;
           filter: grayscale(0.2) contrast(1.1);
-          transition: transform 0.6s var(--transition);
+          transition: transform 0.8s var(--transition), filter 0.6s;
         }
         .about-img-frame:hover .about-img {
-          transform: scale(1.03);
+          transform: scale(1.05) rotate(5deg);
           filter: grayscale(0) contrast(1);
         }
         .floating-badge {
