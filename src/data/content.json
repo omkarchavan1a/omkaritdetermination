@@ -1,0 +1,69 @@
+{
+  "hero": {
+    "label": "Precision Engineering. Strategic Determination.",
+    "title": "Transforming complex problems into <br /><em class=\"serif\">seamless digital experiences</em>",
+    "description": "Providing precision engineering, AI innovation, and strategic determination for the architectural future of digital enterprise."
+  },
+  "about": {
+    "title": "About <em class=\"serif\">Omkar IT</em>.",
+    "description": "Omkar IT Determination is a premier software engineering firm committed to pushing the boundaries of what is digitally possible. We don't just write code; we engineer sophisticated systems designed for scale, resilience, and unparalleled performance.",
+    "stats": [
+      { "value": "150+", "label": "Projects Engineered" },
+      { "value": "99.9%", "label": "System Uptime" }
+    ],
+    "features": [
+      "Enterprise Architecture",
+      "Algorithmic Optimization",
+      "Cloud-Native Infrastructure",
+      "AI & Machine Learning"
+    ]
+  },
+  "services": {
+    "title": "Our <em class=\"serif\">Services</em>.",
+    "description": "We offer a suite of specialized engineering services designed to elevate your technological capabilities and drive enterprise-grade growth.",
+    "list": [
+      {
+        "id": "01",
+        "title": "Full-Stack Software Engineering",
+        "description": "End-to-end development of robust, scalable applications using cutting-edge technologies. We build secure, high-performance systems architecture from the ground up."
+      },
+      {
+        "id": "02",
+        "title": "AI & Machine Learning Integration",
+        "description": "Leveraging advanced artificial intelligence to automate processes, generate predictive insights, and create intelligent digital ecosystems."
+      },
+      {
+        "id": "03",
+        "title": "Cloud Architecture & DevOps",
+        "description": "Designing and deploying resilient, scalable cloud infrastructure. We optimize deployment pipelines for maximum efficiency and continuous delivery."
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Selected <em class=\"serif\">Artifacts</em>.",
+    "description": "A curated selection of our most advanced digital solutions, showcasing our commitment to precision engineering and aesthetic excellence.",
+    "projects": [
+      {
+        "id": "project-1",
+        "title": "Nexus Financial Systems",
+        "category": "FinTech Application",
+        "year": "2023",
+        "description": "A secure, high-frequency trading platform built with Node.js and React, featuring real-time data streaming and advanced cryptographic security protocols."
+      },
+      {
+        "id": "project-2",
+        "title": "Aethelgard AI Analytics",
+        "category": "Machine Learning Dashboard",
+        "year": "2024",
+        "description": "An enterprise analytics suite leveraging machine learning algorithms to process and visualize massive datasets in real-time."
+      },
+      {
+        "id": "project-3",
+        "title": "Omni-Channel Logistics API",
+        "category": "Cloud Architecture",
+        "year": "2024",
+        "description": "A robust, scalable RESTful API powering global supply chain logistics, engineered for 99.99% uptime and sub-millisecond response times."
+      }
+    ]
+  }
+}

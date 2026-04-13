@@ -7,16 +7,37 @@ import Portfolio from "@/components/Portfolio";
 import Process from "@/components/Process";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import connectToDatabase from "@/lib/mongodb";
+import Content from "@/models/Content";
 
-export default function Home() {
+// Function to fetch content from MongoDB
+async function getContent() {
+  try {
+    await connectToDatabase();
+    // Use .lean() to convert Mongoose documents to plain JS objects.
+    const content = await Content.findOne().lean();
+    return content;
+  } catch (error) {
+    console.error("Failed to load content from MongoDB", error);
+    return null;
+  }
+}
+
+export default async function Home() {
+  const content = await getContent();
+
+  if (!content) {
+    return <div>Failed to load content. Please check server logs.</div>;
+  }
+
   return (
     <main>
       <Navbar />
-      <Hero />
+      <Hero content={content.hero} />
       <Marquee />
-      <About />
-      <Services />
-      <Portfolio />
+      <About content={content.about} />
+      <Services content={content.services} />
+      <Portfolio content={content.portfolio} />
       <Process />
       <Contact />
       <Footer />

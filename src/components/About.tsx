@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-export default function About() {
+export default function About({ content }: { content?: any }) {
+  const aboutRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const handleReveal = () => {
       const reveals = document.querySelectorAll(".reveal");
@@ -18,8 +20,23 @@ export default function About() {
     return () => window.removeEventListener("scroll", handleReveal);
   }, []);
 
+  const safeContent = content || {
+    title: "About <em class=\"serif\">Omkar IT</em>.",
+    description: "Omkar IT Determination is a premier software engineering firm committed to pushing the boundaries of what is digitally possible. We don't just write code; we engineer sophisticated systems designed for scale, resilience, and unparalleled performance.",
+    stats: [
+      { value: "150+", label: "Projects Engineered" },
+      { value: "99.9%", label: "System Uptime" }
+    ],
+    features: [
+      "Enterprise Architecture",
+      "Algorithmic Optimization",
+      "Cloud-Native Infrastructure",
+      "AI & Machine Learning"
+    ]
+  };
+
   return (
-    <section id="about">
+    <section id="about" ref={aboutRef}>
       <div className="container">
         <div className="about-split">
           <div className="about-visual reveal">
@@ -41,23 +58,23 @@ export default function About() {
           </div>
           
           <div className="about-content">
-            <span className="section-label reveal">The Founder</span>
-            <h2 className="section-title reveal delay-1">
-              Driven by <em className="serif">Determination</em>,<br />
-              Built for Digital Excellence.
-            </h2>
+            <span className="section-label reveal">The Ethos</span>
+            <h2 className="section-title reveal delay-1" dangerouslySetInnerHTML={{ __html: safeContent.title }}></h2>
             <p className="section-desc reveal delay-2">
-              Based in Pune, India, I specialize in transforming complex business challenges into sleek, high-performance digital products. My approach combines precision engineering with a deep understanding of AI-driven automation.
+              {safeContent.description}
             </p>
-            
+
             <div className="tech-editorial reveal delay-3">
+              {safeContent.stats?.map((stat: any, index: number) => (
+                <div className="tech-row" key={index}>
+                  <span className="tech-label">{stat.label}</span>
+                  <p>{stat.value}</p>
+                </div>
+              ))}
+              
               <div className="tech-row">
-                <span className="tech-label">The Visionary</span>
-                <p>Next.js, AI multi-agent systems, and SEO strategies that dominate search rankings.</p>
-              </div>
-              <div className="tech-row">
-                <span className="tech-label">The Architect</span>
-                <p>Python engineering, distributed logic, and robust backend foundations.</p>
+                <span className="tech-label">Features</span>
+                <p>{safeContent.features?.join(", ")}</p>
               </div>
             </div>
 

@@ -23,7 +23,9 @@ const services = [
   }
 ];
 
-export default function Services() {
+export default function Services({ content }: { content?: any }) {
+  const servicesRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const handleReveal = () => {
       const reveals = document.querySelectorAll(".reveal");
@@ -39,33 +41,57 @@ export default function Services() {
     return () => window.removeEventListener("scroll", handleReveal);
   }, []);
 
+  const safeContent = content || {
+    title: "Our <em class=\"serif\">Services</em>.",
+    description: "We offer a suite of specialized engineering services designed to elevate your technological capabilities and drive enterprise-grade growth.",
+    list: [
+      {
+        id: "01",
+        title: "Full-Stack Software Engineering",
+        description: "End-to-end development of robust, scalable applications using cutting-edge technologies. We build secure, high-performance systems architecture from the ground up."
+      },
+      {
+        id: "02",
+        title: "AI & Machine Learning Integration",
+        description: "Leveraging advanced artificial intelligence to automate processes, generate predictive insights, and create intelligent digital ecosystems."
+      },
+      {
+        id: "03",
+        title: "Cloud Architecture & DevOps",
+        description: "Designing and deploying resilient, scalable cloud infrastructure. We optimize deployment pipelines for maximum efficiency and continuous delivery."
+      }
+    ]
+  };
+
   return (
-    <section id="services">
+    <section id="services" ref={servicesRef}>
       <div className="container">
         <div className="services-header">
-          <span className="section-label reveal">The Expertise</span>
-          <h2 className="section-title reveal delay-1">
-            Curated <em>Digital</em><br />High-End Logic.
-          </h2>
-          <p className="section-desc reveal delay-2">
-            Treating every project as a bespoke digital architecture, focusing on the intersection of aesthetic authority and technical precision.
+          <div className="services-title-area">
+            <span className="section-label reveal">The Expertise</span>
+            <h2 className="section-title reveal delay-1" dangerouslySetInnerHTML={{ __html: safeContent.title }}></h2>
+          </div>
+          <p className="services-desc reveal delay-2">
+            {safeContent.description}
           </p>
         </div>
 
         <div className="services-grid">
-          {services.map((service, index) => (
-            <div key={index} className={`service-card reveal delay-${index + 1}`}>
+          {safeContent.list?.map((service: any, index: number) => (
+            <div key={service.id || index} className={`service-card reveal delay-${index + 1}`}>
               <div className="card-top">
-                <span className="service-num serif">{service.num}</span>
+                <span className="service-num serif">{service.id || `0${index + 1}`}</span>
                 <div className="service-dot"></div>
               </div>
               <h3 className="service-card-title serif">{service.title}</h3>
-              <p className="service-card-desc">{service.desc}</p>
-              <div className="service-tags">
-                {service.tags.map((tag, tIndex) => (
-                  <span key={tIndex} className="tag">{tag}</span>
-                ))}
-              </div>
+              <p className="service-card-desc">{service.description}</p>
+              {service.tags && (
+                <div className="service-tags">
+                  {service.tags.map((tag: string, tIndex: number) => (
+                    <span key={tIndex} className="tag">{tag}</span>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

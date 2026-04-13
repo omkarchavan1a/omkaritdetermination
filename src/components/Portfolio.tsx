@@ -21,7 +21,7 @@ const projects = [
   }
 ];
 
-export default function Portfolio() {
+export default function Portfolio({ content }: { content?: any }) {
   useEffect(() => {
     const handleReveal = () => {
       const reveals = document.querySelectorAll(".reveal");
@@ -37,29 +37,33 @@ export default function Portfolio() {
     return () => window.removeEventListener("scroll", handleReveal);
   }, []);
 
+  const safeContent = content || {
+    title: "Selected <em class=\"serif\">Artifacts</em>.",
+    description: "A curated selection of our most advanced digital solutions, showcasing our commitment to precision engineering and aesthetic excellence.",
+    projects: projects
+  };
+
   return (
     <section id="portfolio">
       <div className="container">
         <div className="portfolio-header">
           <span className="section-label reveal">The Collection</span>
-          <h2 className="section-title reveal delay-1">
-            Selected <em>Artifacts</em><br />of Digital Engineering.
-          </h2>
+          <h2 className="section-title reveal delay-1" dangerouslySetInnerHTML={{ __html: safeContent.title }}></h2>
         </div>
 
         <div className="portfolio-grid">
-          {projects.map((project, index) => (
+          {safeContent.projects?.map((project: any, index: number) => (
             <div key={index} className={`project-artifact reveal delay-${index + 1}`}>
               <div className="artifact-top">
                 <div className="artifact-meta">
                   <span className="artifact-cat">{project.category}</span>
                   <div className="artifact-tags">
-                    {project.tags.map((tag, tIndex) => (
+                    {project.tags?.map((tag: string, tIndex: number) => (
                       <span key={tIndex} className="tag">{tag}</span>
                     ))}
                   </div>
                 </div>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="artifact-link">
+                <a href={project.link || "#"} target="_blank" rel="noopener noreferrer" className="artifact-link">
                   Visit Project ↗
                 </a>
               </div>
@@ -67,14 +71,14 @@ export default function Portfolio() {
               <div className="artifact-main">
                 <div className="artifact-icon-box">
                    <img
-                    src={project.favicon}
+                    src={project.favicon || "/logo.jpg"}
                     alt={`${project.title} logo`}
                     className="artifact-icon"
                   />
                 </div>
                 <div className="artifact-text">
                   <h3 className="artifact-title serif">{project.title}</h3>
-                  <p className="artifact-desc">{project.desc}</p>
+                  <p className="artifact-desc">{project.desc || project.description}</p>
                 </div>
               </div>
 

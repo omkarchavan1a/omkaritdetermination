@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sendEmail } from "@/app/actions";
+import { submitInquiry } from "@/app/actions";
 
 export default function Contact() {
   const [result, setResult] = useState("");
@@ -30,7 +30,7 @@ export default function Contact() {
     const formData = new FormData(event.currentTarget);
 
     try {
-      const data = await sendEmail(formData);
+      const data = await submitInquiry(formData);
 
       if (data.success) {
         setResult("Inquiry sent successfully!");

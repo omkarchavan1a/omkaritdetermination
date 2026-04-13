@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-export default function Hero() {
+export default function Hero({ content }: { content?: any }) {
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -21,6 +21,13 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleReveal);
   }, []);
 
+  // Fallback defaults for safety during tests
+  const safeContent = content || {
+    label: "Precision Engineering. Strategic Determination.",
+    title: "Transforming complex problems into <br /><em class=\"serif\">seamless digital experiences</em>",
+    description: "Providing precision engineering, AI innovation, and strategic determination for the architectural future of digital enterprise."
+  };
+
   return (
     <section id="hero" ref={heroRef}>
       <div className="hero-atmosphere"></div>
@@ -35,14 +42,14 @@ export default function Hero() {
               className="label-logo" 
               onError={(e) => (e.currentTarget.style.display = 'none')}
             />
-            <span>Precision Engineering. Strategic Determination.</span>
+            <span>{safeContent.label}</span>
           </div>
-          <h1 className="hero-title display-lg reveal delay-1">
-            Transforming complex problems into <br />
-            <em className="serif">seamless digital experiences</em>
-          </h1>
+          <h1 
+            className="hero-title display-lg reveal delay-1" 
+            dangerouslySetInnerHTML={{ __html: safeContent.title }}
+          />
           <p className="hero-desc reveal delay-2">
-            Providing precision engineering, AI innovation, and strategic determination for the architectural future of digital enterprise.
+            {safeContent.description}
           </p>
           <div className="hero-ctas reveal delay-3">
             <Link href="#portfolio" className="btn-primary">
