@@ -10,16 +10,24 @@ import Footer from "@/components/Footer";
 import connectToDatabase from "@/lib/mongodb";
 import Content from "@/models/Content";
 
-// Function to fetch content from MongoDB
+import localContent from "@/data/content.json";
+
+// Function to fetch content from MongoDB with local fallback
 async function getContent() {
   try {
     await connectToDatabase();
     // Use .lean() to convert Mongoose documents to plain JS objects.
-    const content = await Content.findOne().lean();
-    return content;
+    const dbContent = await Content.findOne().lean();
+    
+    if (dbContent) {
+      return dbContent;
+    }
+    
+    console.warn("No content found in MongoDB, using local fallback");
+    return localContent;
   } catch (error) {
-    console.error("Failed to load content from MongoDB", error);
-    return null;
+    console.error("Failed to load content from MongoDB, using local fallback", error);
+    return localContent;
   }
 }
 

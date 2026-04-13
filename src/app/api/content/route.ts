@@ -5,17 +5,23 @@ import Content from "@/models/Content";
 export async function GET() {
   try {
     await connectToDatabase();
-    // Fetch the single content document. If it doesn't exist, we return a 404 or empty object.
+    // Fetch the single content document.
     const content = await Content.findOne();
     
     if (!content) {
-      return NextResponse.json({ message: "No content found in database" }, { status: 404 });
+      return NextResponse.json({ 
+        message: "No content found in database. Using local defaults.",
+        isFallback: true 
+      }, { status: 200 });
     }
     
     return NextResponse.json(content);
   } catch (error) {
     console.error("MongoDB GET Error:", error);
-    return NextResponse.json({ message: "Failed to load content from DB" }, { status: 500 });
+    return NextResponse.json({ 
+      message: "Database connection failed. Please check MONGODB_URI in .env.local",
+      error: (error as any).message 
+    }, { status: 500 });
   }
 }
 

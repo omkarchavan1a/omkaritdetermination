@@ -9,17 +9,22 @@ export default function AdminDashboard() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [activeTab, setActiveTab] = useState<"content" | "inquiries">("content");
+  const [isDbConnected, setIsDbConnected] = useState(true);
 
   useEffect(() => {
     // Initial fetch for content
     fetch("/api/content")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) setIsDbConnected(false);
+        return res.json();
+      })
       .then((data) => {
         setContent(data);
         if (activeTab === "content") setLoading(false);
       })
       .catch((err) => {
         console.error(err);
+        setIsDbConnected(false);
         setLoading(false);
       });
 
@@ -110,6 +115,13 @@ export default function AdminDashboard() {
           )}
         </div>
       </div>
+      
+      {!isDbConnected && (
+        <div className="db-warning">
+          <strong>Database Disconnected:</strong> Your <code>.env.local</code> has an invalid <code>MONGODB_URI</code> password. 
+          Changes saved here will <strong>not</strong> persist until fixed.
+        </div>
+      )}
 
       {message && (
         <div className={`status-message ${message.includes("error") || message.includes("Failed") ? "error" : "success"}`}>
@@ -307,6 +319,16 @@ export default function AdminDashboard() {
         .btn-primary { padding: 10px 24px; border-radius: 6px; }
         .empty-state { text-align: center; padding: 60px; color: var(--on-surface-variant); font-style: italic; }
         .note { grid-column: 1 / -1; margin-top: 20px; font-size: 0.8rem; color: var(--on-surface-variant); }
+        .db-warning {
+          background: rgba(231, 76, 60, 0.15);
+          border: 1px solid #e74c3c;
+          color: #e74c3c;
+          padding: 16px;
+          border-radius: 8px;
+          margin-bottom: 30px;
+          font-size: 0.9rem;
+        }
+        .db-warning code { background: rgba(0,0,0,0.2); padding: 2px 4px; border-radius: 4px; }
       `}</style>
     </div>
   );
