@@ -111,13 +111,20 @@ export default function Footer() {
           gap: 16px;
         }
         .nav-list a {
-          color: var(--on-surface);
+          color: #3b82f6;
           text-decoration: none;
           font-size: 1rem;
           font-weight: 300;
           transition: color 0.3s;
         }
         .nav-list a:hover {
+          color: var(--primary-container);
+        }
+
+        .footer-nav .nav-group:last-child .nav-list a {
+          color: var(--on-surface);
+        }
+        .footer-nav .nav-group:last-child .nav-list a:hover {
           color: var(--primary-container);
         }
 

@@ -33,9 +33,9 @@ export default function Navbar() {
         {/* Desktop Links */}
         <ul className="nav-links desktop-only">
           <li><Link href="#about">The Founder</Link></li>
-          <li><Link href="#services">Expertise</Link></li>
-          <li><Link href="#portfolio">Artifacts</Link></li>
-          <li><Link href="#process">Method</Link></li>
+          <li><Link href="#services">The Expertise</Link></li>
+          <li><Link href="#portfolio">The Artifacts</Link></li>
+          <li><Link href="#process">The Method</Link></li>
           <li><Link href="#contact" className="nav-cta">Get in Touch</Link></li>
         </ul>
 
@@ -51,9 +51,9 @@ export default function Navbar() {
       <div className={`mobile-menu ${isMenuOpen ? "active" : ""}`}>
         <ul className="mobile-nav-links">
           <li><Link href="#about" onClick={toggleMenu}>The Founder</Link></li>
-          <li><Link href="#services" onClick={toggleMenu}>Expertise</Link></li>
-          <li><Link href="#portfolio" onClick={toggleMenu}>Artifacts</Link></li>
-          <li><Link href="#process" onClick={toggleMenu}>Method</Link></li>
+          <li><Link href="#services" onClick={toggleMenu}>The Expertise</Link></li>
+          <li><Link href="#portfolio" onClick={toggleMenu}>The Artifacts</Link></li>
+          <li><Link href="#process" onClick={toggleMenu}>The Method</Link></li>
           <li><Link href="#contact" className="btn-primary" onClick={toggleMenu}>Get in Touch</Link></li>
         </ul>
       </div>
@@ -112,7 +112,7 @@ export default function Navbar() {
         }
         .nav-links :global(a) {
           text-decoration: none;
-          color: var(--on-surface-variant);
+          color: var(--primary-container);
           font-size: 0.75rem;
           font-weight: 500;
           letter-spacing: 0.12em;
