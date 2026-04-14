@@ -5,17 +5,17 @@ import { useEffect } from "react";
 const projects = [
   {
     title: "The Cafe Elite",
-    category: "Hospitality Architecture",
-    tags: ["Full Stack", "SEO Architecture", "Social Strategy"],
-    desc: "A digital translation of a premium café experience. Beyond pure code, this artifact synchronizes the brand's digital presence with its physical atmosphere.",
+    category: "Business Promotion",
+    tags: ["Full Stack", "Instagram Marketing", "Web Design"],
+    desc: "Full website design integrated with Instagram marketing strategies. A digital translation of a premium café experience.",
     favicon: "https://www.google.com/s2/favicons?sz=128&domain=the-cafe-elite.vercel.app",
     link: "https://the-cafe-elite.vercel.app/"
   },
   {
     title: "Shreetej Properties",
-    category: "Enterprise Real Estate",
-    tags: ["Next.js", "Logic Engine", "Vercel"],
-    desc: "A structural real estate portal featuring custom dynamic quotation systems and precision-engineered search console integration for organic dominance.",
+    category: "Real Estate Portal",
+    tags: ["Next.js", "Real Estate", "Logic Engine"],
+    desc: "Technical implementation involving custom dynamic quotation systems and detailed address configurations for organic dominance.",
     favicon: "https://www.google.com/s2/favicons?sz=128&domain=shreetejproperties.com",
     link: "https://www.shreetejproperties.com/"
   }
@@ -39,7 +39,7 @@ export default function Portfolio({ content }: { content?: any }) {
 
   const safeContent = content || {
     title: "Selected <em class=\"serif\">Artifacts</em>.",
-    description: "A curated selection of our most advanced digital solutions, showcasing our commitment to precision engineering and aesthetic excellence.",
+    description: "A curated selection of our most advanced digital solutions, showcasing high-quality technical delivery and strategic design.",
     projects: projects
   };
 
@@ -47,7 +47,7 @@ export default function Portfolio({ content }: { content?: any }) {
     <section id="portfolio">
       <div className="container">
         <div className="portfolio-header">
-          <span className="section-label reveal">The Collection</span>
+          <span className="section-label reveal">The Artifacts</span>
           <h2 className="section-title reveal delay-1" dangerouslySetInnerHTML={{ __html: safeContent.title }}></h2>
         </div>
 

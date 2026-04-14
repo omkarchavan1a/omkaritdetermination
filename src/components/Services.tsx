@@ -43,22 +43,22 @@ export default function Services({ content }: { content?: any }) {
 
   const safeContent = content || {
     title: "Our <em class=\"serif\">Services</em>.",
-    description: "We offer a suite of specialized engineering services designed to elevate your technological capabilities and drive enterprise-grade growth.",
+    description: "We offer a suite of specialized engineering and AI services designed to elevate your technological capabilities and drive business automation.",
     list: [
       {
         id: "01",
-        title: "Full-Stack Software Engineering",
-        description: "End-to-end development of robust, scalable applications using cutting-edge technologies. We build secure, high-performance systems architecture from the ground up."
+        title: "Web Development",
+        description: "High-quality websites and landing pages built with Next.js and Tailwind CSS. Expert in Vercel/Hostinger deployments and SEO optimization."
       },
       {
         id: "02",
-        title: "AI & Machine Learning Integration",
-        description: "Leveraging advanced artificial intelligence to automate processes, generate predictive insights, and create intelligent digital ecosystems."
+        title: "AI Integration",
+        description: "Designing custom chatbots and multi-agent systems using CrewAI to automate business processes and enhance cognitive intelligence."
       },
       {
         id: "03",
-        title: "Cloud Architecture & DevOps",
-        description: "Designing and deploying resilient, scalable cloud infrastructure. We optimize deployment pipelines for maximum efficiency and continuous delivery."
+        title: "SEO & Marketing",
+        description: "Proven track record of ranking sites on Google Search Console. Creating high-impact Instagram synergy that mirrors your brand's design language."
       }
     ]
   };

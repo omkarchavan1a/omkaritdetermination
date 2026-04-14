@@ -7,6 +7,7 @@ import Portfolio from "@/components/Portfolio";
 import Process from "@/components/Process";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Analytics from "@/components/Analytics";
 import connectToDatabase from "@/lib/mongodb";
 import Content from "@/models/Content";
 
@@ -46,6 +47,7 @@ export default async function Home() {
       <About content={content.about} />
       <Services content={content.services} />
       <Portfolio content={content.portfolio} />
+      <Analytics />
       <Process />
       <Contact />
       <Footer />

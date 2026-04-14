@@ -22,16 +22,18 @@ export default function About({ content }: { content?: any }) {
 
   const safeContent = content || {
     title: "About <em class=\"serif\">Omkar IT</em>.",
-    description: "Omkar IT Determination is a premier software engineering firm committed to pushing the boundaries of what is digitally possible. We don't just write code; we engineer sophisticated systems designed for scale, resilience, and unparalleled performance.",
+    description: "Omkar IT Determination is a premier software engineering firm committed to software excellence. We focus on high-quality technical delivery, transforming architectural digital enterprise into resilient systems designed for scale and performance.",
     stats: [
       { value: "150+", label: "Projects Engineered" },
       { value: "99.9%", label: "System Uptime" }
     ],
     features: [
-      "Enterprise Architecture",
-      "Algorithmic Optimization",
-      "Cloud-Native Infrastructure",
-      "AI & Machine Learning"
+      "Next.js / Tailwind CSS",
+      "Python (Flask) / CrewAI",
+      "Web Scraping (BS4)",
+      "SQLite / Cloud Deployment",
+      "Google Search Console SEO",
+      "Instagram Marketing Synergy"
     ]
   };
 
@@ -58,7 +60,7 @@ export default function About({ content }: { content?: any }) {
           </div>
           
           <div className="about-content">
-            <span className="section-label reveal">The Ethos</span>
+            <span className="section-label reveal">The Founder</span>
             <h2 className="section-title reveal delay-1" dangerouslySetInnerHTML={{ __html: safeContent.title }}></h2>
             <p className="section-desc reveal delay-2">
               {safeContent.description}

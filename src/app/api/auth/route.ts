@@ -5,10 +5,13 @@ export async function POST(req: Request) {
   try {
     const { email, password } = await req.json();
 
-    // Check credentials (hardcoded as requested)
-    if (email === "omkarchavan@gmail.com" && password === "736200") {
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    // Check credentials against environment variables
+    if (email === adminEmail && password === adminPassword) {
       // Create a JWT token using jose
-      const secret = new TextEncoder().encode(process.env.JWT_SECRET || "default_super_secret_key_123");
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET);
       const token = await new SignJWT({ email })
         .setProtectedHeader({ alg: "HS256" })
         .setExpirationTime("24h")

@@ -18,7 +18,7 @@ export default function Footer() {
               <h2 className="signature-logo serif">Omkar IT Determination</h2>
             </div>
             <p className="signature-tagline">
-              Architecting the digital future through precision engineering and strategic AI integration.
+              Founder & Lead Developer at Omkar IT Determination. Providing high-quality websites, landing pages, IT software, and AI-driven services.
             </p>
           </div>
           

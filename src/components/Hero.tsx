@@ -25,7 +25,7 @@ export default function Hero({ content }: { content?: any }) {
   const safeContent = content || {
     label: "Precision Engineering. Strategic Determination.",
     title: "Transforming complex problems into <br /><em class=\"serif\">seamless digital experiences</em>",
-    description: "Providing precision engineering, AI innovation, and strategic determination for the architectural future of digital enterprise."
+    description: "Founder & Lead Developer at Omkar IT Determination. Providing high-quality websites, landing pages, IT software, and AI-driven services with strategic determination."
   };
 
   return (
