@@ -25,7 +25,11 @@ export async function submitInquiry(formData: FormData) {
 
     return { success: true, message: "Inquiry submitted successfully! We will get back to you soon." };
   } catch (error: any) {
-    console.error("Database error:", error);
+    console.error("DEBUG: Inquiry submission failed");
+    console.error("Error Message:", error.message);
+    if (error.name === 'MongooseServerSelectionError') {
+      console.error("Connection Tip: Check your IP whitelist in MongoDB Atlas.");
+    }
     return { success: false, message: "Failed to submit inquiry. Please try again later." };
   }
 }
