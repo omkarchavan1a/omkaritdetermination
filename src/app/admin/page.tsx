@@ -87,10 +87,11 @@ export default function AdminDashboard() {
     }
   };
 
-  const updateSection = (section: string, field: string, value: any) => {
+  const updateSection = (section: string, field: string, value: unknown) => {
+    if (!content) return;
     setContent({
       ...content,
-      [section]: { ...content[section], [field]: value }
+      [section]: { ...(content[section] as Record<string, unknown>), [field]: value }
     });
   };
 
@@ -181,7 +182,7 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {activeTab === "content" ? (
+      {activeTab === "content" && content ? (
         <div className="editor-container">
           <div className="section-sidebar">
             {sections.map(s => (

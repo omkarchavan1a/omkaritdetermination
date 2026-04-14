@@ -10,30 +10,31 @@ interface Field {
 
 interface ArrayEditorProps {
   title: string;
-  items: Record<string, any>[];
+  items: Record<string, unknown>[];
   schema: Field[];
-  onUpdate: (newItems: Record<string, any>[]) => void;
+  onUpdate: (newItems: Record<string, unknown>[]) => void;
   addItemLabel?: string;
 }
 
 export default function ArrayEditor({ title, items, schema, onUpdate, addItemLabel = "Add Item" }: ArrayEditorProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
-  const handleFieldChange = (index: number, key: string, value: any) => {
+  const handleFieldChange = (index: number, key: string, value: unknown) => {
     const newItems = [...items];
+    const targetItem = newItems[index] as Record<string, unknown>;
     if (key.includes(".")) {
       // Handle nested fields like tags (array field specifically for project tags)
       const keys = key.split(".");
       const firstKey = keys[0];
-      newItems[index][firstKey] = value;
+      targetItem[firstKey] = value;
     } else {
-      newItems[index][key] = value;
+      targetItem[key] = value;
     }
     onUpdate(newItems);
   };
 
   const addItem = () => {
-    const defaultItem: Record<string, any> = {};
+    const defaultItem: Record<string, unknown> = {};
     schema.forEach(field => {
       if (field.type === "array") {
         defaultItem[field.key] = [];
@@ -79,7 +80,7 @@ export default function ArrayEditor({ title, items, schema, onUpdate, addItemLab
           <div key={item.id || index} className={`item-container ${expandedIndex === index ? 'expanded' : ''}`}>
             <div className="item-summary" onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}>
               <span className="item-title">
-                {item[schema[0]?.key] || `Item #${index + 1}`}
+                {String(item[schema[0]?.key] || `Item #${index + 1}`)}
               </span>
               <div className="item-controls">
                 <button onClick={(e) => { e.stopPropagation(); moveItem(index, "up"); }} disabled={index === 0}>↑</button>
@@ -103,7 +104,7 @@ export default function ArrayEditor({ title, items, schema, onUpdate, addItemLab
                       <input 
                         type="text" 
                         placeholder="Comma separated values"
-                        value={Array.isArray(item[field.key]) ? item[field.key].join(", ") : item[field.key]}
+                        value={Array.isArray(item[field.key]) ? (item[field.key] as string[]).join(", ") : String(item[field.key] || "")}
                         onChange={(e) => handleFieldChange(index, field.key, e.target.value.split(",").map(s => s.trim()))}
                       />
                     ) : (
