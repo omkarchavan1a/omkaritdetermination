@@ -25,7 +25,10 @@ const steps = [
   }
 ];
 
-export default function Process() {
+export default function Process({ content }: { content?: any }) {
+  const displayTitle = content?.title || "A Blueprint for <em class=\"serif\">Absolute Success</em>.";
+  const displaySteps = content?.steps && content.steps.length > 0 ? content.steps : steps;
+
   useEffect(() => {
     const handleReveal = () => {
       const reveals = document.querySelectorAll(".reveal");
@@ -46,13 +49,11 @@ export default function Process() {
       <div className="container">
         <div className="process-header">
           <span className="section-label reveal">The Method</span>
-          <h2 className="section-title reveal delay-1">
-            A Blueprint for <em className="serif">Absolute Success</em>.
-          </h2>
+          <h2 className="section-title reveal delay-1" dangerouslySetInnerHTML={{ __html: displayTitle }}></h2>
         </div>
 
         <div className="process-list">
-          {steps.map((step, index) => (
+          {displaySteps.map((step: any, index: number) => (
             <div key={index} className="process-item reveal">
               <div className="item-meta">
                 <span className="item-num serif">{step.num}</span>

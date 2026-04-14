@@ -69,5 +69,57 @@
         "favicon": "https://www.google.com/s2/favicons?sz=128&domain=shreetejproperties.com"
       }
     ]
+  },
+  "marquee": {
+    "items": [
+      "NEXT.JS 14+", "AI INTEGRATION", "CORE WEB VITALS", "STRATEGIC SEO",
+      "PRECISION ENGINEERING", "FLASK ECOSYSTEM", "AWWWARDS-LEVEL UI",
+      "DATA SCRAPING", "CLOUD DEPLOYMENT", "SYSTEM ARCHITECTURE"
+    ]
+  },
+  "process": {
+    "title": "A Blueprint for <em class=\"serif\">Absolute Success</em>.",
+    "steps": [
+      {
+        "num": "α",
+        "title": "Intelligence Gathering",
+        "desc": "A deep dive into the business's DNA, identifying hidden bottlenecks and mapping a technical route for strategic advantage."
+      },
+      {
+        "num": "β",
+        "title": "Structural Synthesis",
+        "desc": "Architecting the infrastructure. We build with a focus on code integrity, ensuring a foundation that supports scale and cinematic performance."
+      },
+      {
+        "num": "γ",
+        "title": "AI Integration",
+        "desc": "Injecting bespoke AI multi-agent logic. We transform static platforms into living, evolving artifacts of automated intelligence."
+      },
+      {
+        "num": "δ",
+        "title": "Constant Evolution",
+        "desc": "The launch is simply the inception. Continuous SEO optimization and recursive logic refinement to ensure long-term brand dominance."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Start a <em class=\"serif\">Extraordinary</em> Conversation.",
+    "email": "omkarchavan1500@gmail.com",
+    "phone": "+91 90965 18451",
+    "address": "Pune, India — Global Scale."
+  },
+  "footer": {
+    "trademark": "© 2026 Omkar IT Determination. All Rights Reserved.",
+    "links": [
+      { "label": "The Founder", "url": "#about" },
+      { "label": "The Expertise", "url": "#services" },
+      { "label": "The Artifacts", "url": "#portfolio" },
+      { "label": "The Method", "url": "#process" }
+    ],
+    "social": [
+      { "platform": "Instagram", "url": "https://www.instagram.com/omkarchavann_", "icon": "" },
+      { "platform": "WhatsApp", "url": "https://wa.me/919096518451", "icon": "" },
+      { "platform": "Email Office", "url": "mailto:omkarchavan1500@gmail.com", "icon": "" }
+    ]
   }
 }

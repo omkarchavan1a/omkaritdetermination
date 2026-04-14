@@ -2,7 +2,21 @@
 
 import Link from "next/link";
 
-export default function Footer() {
+export default function Footer({ content }: { content?: any }) {
+  const displayTagline = content?.tagline || "Founder & Lead Developer at Omkar IT Determination. Providing high-quality websites, landing pages, IT software, and AI-driven services.";
+  const displayTrademark = content?.trademark || `© ${new Date().getFullYear()} Omkar IT Determination. All Rights Reserved.`;
+  const internalLinks = (content?.links && content.links.length > 0) ? content.links : [
+    { label: "The Founder", url: "#about" },
+    { label: "The Expertise", url: "#services" },
+    { label: "The Artifacts", url: "#portfolio" },
+    { label: "The Method", url: "#process" }
+  ];
+  const socialLinks = (content?.social && content.social.length > 0) ? content.social : [
+    { platform: "Instagram", url: "https://www.instagram.com/omkarchavann_", icon: "" },
+    { platform: "WhatsApp", url: "https://wa.me/919096518451", icon: "" },
+    { platform: "Email Office", url: "mailto:omkarchavan1500@gmail.com", icon: "" }
+  ];
+
   return (
     <footer id="footer">
       <div className="container">
@@ -18,7 +32,7 @@ export default function Footer() {
               <h2 className="signature-logo serif">Omkar IT Determination</h2>
             </div>
             <p className="signature-tagline">
-              Founder & Lead Developer at Omkar IT Determination. Providing high-quality websites, landing pages, IT software, and AI-driven services.
+              {displayTagline}
             </p>
           </div>
           
@@ -26,18 +40,21 @@ export default function Footer() {
             <div className="nav-group">
               <span className="nav-label">Navigation</span>
               <ul className="nav-list">
-                <li><Link href="#about">The Founder</Link></li>
-                <li><Link href="#services">The Expertise</Link></li>
-                <li><Link href="#portfolio">The Artifacts</Link></li>
-                <li><Link href="#process">The Method</Link></li>
+                {internalLinks.map((link: any, i: number) => (
+                  <li key={i}><Link href={link.url}>{link.label}</Link></li>
+                ))}
               </ul>
             </div>
             <div className="nav-group">
               <span className="nav-label">Connect</span>
               <ul className="nav-list">
-                <li><a href="https://www.instagram.com/omkarchavann_" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                <li><a href="https://wa.me/919096518451" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-                <li><a href="mailto:omkarchavan1500@gmail.com">Email Office</a></li>
+                {socialLinks.map((link: any, i: number) => (
+                  <li key={i}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer">
+                      {link.platform}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -45,7 +62,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <div className="copyright">
-            © {new Date().getFullYear()} Omkar IT Determination. All Rights Reserved.
+            {displayTrademark}
           </div>
           <div className="location-stamp">
             Pune, India — Global Scale.

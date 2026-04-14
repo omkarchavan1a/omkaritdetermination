@@ -3,9 +3,13 @@
 import { useState, useEffect } from "react";
 import { submitInquiry } from "@/app/actions";
 
-export default function Contact() {
+export default function Contact({ content }: { content?: any }) {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const displayTitle = content?.title || "Start a <em class=\"serif\">Extraordinary</em> Conversation.";
+  const displayEmail = content?.email || "omkarchavan1500@gmail.com";
+  const displayPhone = content?.phone || "+91 90965 18451";
 
   useEffect(() => {
     const handleReveal = () => {
@@ -52,9 +56,7 @@ export default function Contact() {
         <div className="contact-editorial">
           <div className="contact-text">
             <span className="section-label reveal">The Dialogue</span>
-            <h2 className="section-title reveal delay-1">
-              Start a <em className="serif">Extraordinary</em> Conversation.
-            </h2>
+            <h2 className="section-title reveal delay-1" dangerouslySetInnerHTML={{ __html: displayTitle }}></h2>
             <p className="section-desc reveal delay-2">
               Ready to architect your digital future? Reach out via the form or through our direct channels.
             </p>
@@ -62,11 +64,11 @@ export default function Contact() {
             <div className="direct-channels reveal delay-3">
               <div className="direct-item">
                 <span className="direct-label">Digital Office</span>
-                <a href="mailto:omkarchavan1500@gmail.com" className="direct-link">omkarchavan1500@gmail.com</a>
+                <a href={`mailto:${displayEmail}`} className="direct-link">{displayEmail}</a>
               </div>
               <div className="direct-item">
                 <span className="direct-label">Direct Line</span>
-                <a href="https://wa.me/919096518451" className="direct-link">+91 90965 18451</a>
+                <a href={`https://wa.me/${displayPhone.replace(/\s+/g, '')}`} className="direct-link">{displayPhone}</a>
               </div>
             </div>
           </div>

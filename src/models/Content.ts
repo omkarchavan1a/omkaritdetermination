@@ -41,6 +41,41 @@ const ContentSchema = new mongoose.Schema(
         },
       ],
     },
+    marquee: {
+      items: [{ type: String }],
+    },
+    process: {
+      title: { type: String, default: "" },
+      steps: [
+        {
+          num: String,
+          title: String,
+          desc: String,
+        },
+      ],
+    },
+    contact: {
+      title: { type: String, default: "" },
+      email: { type: String, default: "" },
+      phone: { type: String, default: "" },
+      address: { type: String, default: "" },
+    },
+    footer: {
+      trademark: { type: String, default: "" },
+      links: [
+        {
+          label: String,
+          url: String,
+        },
+      ],
+      social: [
+        {
+          platform: String,
+          url: String,
+          icon: String,
+        },
+      ],
+    },
   },
   { timestamps: true }
 );

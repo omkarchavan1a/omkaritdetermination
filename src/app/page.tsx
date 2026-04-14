@@ -43,14 +43,14 @@ export default async function Home() {
     <main>
       <Navbar />
       <Hero content={content.hero} />
-      <Marquee />
+      <Marquee items={content.marquee?.items} />
       <About content={content.about} />
       <Services content={content.services} />
       <Portfolio content={content.portfolio} />
       <Analytics />
-      <Process />
-      <Contact />
-      <Footer />
+      <Process content={content.process} />
+      <Contact content={content.contact} />
+      <Footer content={content.footer} />
     </main>
   );
 }

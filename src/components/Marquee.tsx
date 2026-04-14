@@ -6,12 +6,14 @@ const techStack = [
   "DATA SCRAPING", "CLOUD DEPLOYMENT", "SYSTEM ARCHITECTURE"
 ];
 
-export default function Marquee() {
+export default function Marquee({ items }: { items?: string[] }) {
+  const displayItems = items && items.length > 0 ? items : techStack;
+
   return (
     <div className="marquee">
       <div className="marquee-content">
         {/* Double the array for seamless looping */}
-        {[...techStack, ...techStack].map((item, index) => (
+        {[...displayItems, ...displayItems].map((item, index) => (
           <div key={index} className="marquee-item">
             <span className="marquee-dot"></span>
             {item}
