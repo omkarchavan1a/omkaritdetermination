@@ -77,7 +77,7 @@ export default function ArrayEditor({ title, items, schema, onUpdate, addItemLab
 
       <div className="items-list">
         {items.map((item, index) => (
-          <div key={item.id || index} className={`item-container ${expandedIndex === index ? 'expanded' : ''}`}>
+          <div key={(item.id as string | number) || index} className={`item-container ${expandedIndex === index ? "expanded" : ""}`}>
             <div className="item-summary" onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}>
               <span className="item-title">
                 {String(item[schema[0]?.key] || `Item #${index + 1}`)}
@@ -97,7 +97,7 @@ export default function ArrayEditor({ title, items, schema, onUpdate, addItemLab
                     {field.type === "textarea" ? (
                       <textarea 
                         rows={3}
-                        value={item[field.key] || ""}
+                        value={(item[field.key] as string) || ""}
                         onChange={(e) => handleFieldChange(index, field.key, e.target.value)}
                       />
                     ) : field.type === "array" ? (
@@ -110,7 +110,7 @@ export default function ArrayEditor({ title, items, schema, onUpdate, addItemLab
                     ) : (
                       <input 
                         type="text"
-                        value={item[field.key] || ""}
+                        value={(item[field.key] as string) || ""}
                         onChange={(e) => handleFieldChange(index, field.key, e.target.value)}
                       />
                     )}
